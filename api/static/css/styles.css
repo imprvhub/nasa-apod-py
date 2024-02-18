@@ -129,6 +129,26 @@ body {
     letter-spacing: 2px;
 }
 
+.socials-container {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+}
+
+.ivanlunadev-link,
+.github-link,
+.linkedin-link {
+    text-decoration: none;
+    color: inherit;    
+}
+
+
+.ivanlunadev-link:hover,
+.github-link:hover,
+.linkedin-link:hover {
+    color: white;
+}
+
 #navigationArrows {
     display: flex;
     justify-content: center; 
