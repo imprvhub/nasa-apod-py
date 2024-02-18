@@ -142,7 +142,7 @@ def update_image():
         selected_date = request.args.get('date')
         picture = apod(selected_date)
         print("Explanation:", picture.explanation)
-        return jsonify({'url': picture.url, 'title': picture.title, 'explanation': picture.explanation})
+        return jsonify({'url': picture.url, 'title': picture.title, 'explanation': 'Description: ' + picture.explanation})
     except Exception as e:
         print(f"Error: {str(e)}")
         return jsonify({'error': 'Image not found'}), 404

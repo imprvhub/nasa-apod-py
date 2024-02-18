@@ -3,6 +3,17 @@
     src: url('/static/fonts/QueensidesMedium-x30zV.ttf') format('truetype');
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.logo-style {
+    width: 50px;
+    height: 50px;
+}
+
 h1 {
     font-family: 'ConduitPersonalUseRegular', sans-serif;
 }
@@ -151,6 +162,10 @@ body {
     .card {
         max-width: 280px;
     }
+    .logo-style {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* MobileM (375px) */
@@ -166,6 +181,10 @@ body {
     }
     .card {
         max-width: 330px;
+    }
+    .logo-style {
+        width: 36px;
+        height: 36px;
     }
 }
 
@@ -183,6 +202,11 @@ body {
     .card {
         max-width: 380px;
     }
+    
+    .logo-style {
+        width: 38px;
+        height: 38px;
+    }
 }
 
 /* Tablet (768px) */
@@ -198,6 +222,11 @@ body {
     }
     .card {
         max-width: 600px;
+    }
+    
+    .logo-style {
+        width: 42px;
+        height: 42px;
     }
 }
 
@@ -215,6 +244,11 @@ body {
     .card {
         max-width: 800px;
     }
+    
+    .logo-style {
+        width: 46px;
+        height: 46px;
+    }
 }
 
 /* LaptopL (1440px) */
@@ -230,6 +264,11 @@ body {
     }
     .card {
         max-width: 1200px;
+    }
+    
+    .logo-style {
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -247,4 +286,9 @@ body {
     .card {
         max-width: 1400px;
     }
+    .logo-style {
+        width: 64px;
+        height: 64px;
+    }
+    
 }

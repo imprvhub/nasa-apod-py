@@ -1,3 +1,3 @@
-# Welcome to the [NASA-APOD-PY](https:///) Project.
+# Welcome to the [NASA APOD VIEWER](https:///) Project.
 
 This Repo is currently under maintenance.
