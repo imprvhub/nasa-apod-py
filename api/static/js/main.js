@@ -26,7 +26,6 @@ function updateImage() {
                 iframe.width = "600";
                 iframe.height = "600";
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
-                iframe.frameBorder = "0";
                 iframe.allowFullscreen = true;
                 imageElement.innerHTML = '';
                 imageElement.appendChild(iframe);
@@ -49,6 +48,21 @@ function updateImage() {
         });
 }
 
+function changeDate(offset) {
+    var datePicker = document.getElementById("datePicker");
+    var selectedDate = new Date(datePicker.value);
+    selectedDate.setDate(selectedDate.getDate() + offset);
+    
+    var year = selectedDate.getFullYear();
+    var month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    var day = String(selectedDate.getDate()).padStart(2, '0');
+    
+    var newDate = `${year}-${month}-${day}`;
+    datePicker.value = newDate;
+    updateImage();
+}
+
+
 function expandImage() {
     var expandedContainer = document.getElementById("expandedImageContainer");
     var imageElement = document.getElementById("expandedImage");
@@ -56,12 +70,13 @@ function expandImage() {
     imageElement.src = document.getElementById("apodImage").src;
     imageElement.alt = document.getElementById("apodImage").alt;
     expandedExplanation.style.display = "block";
+    expandedExplanation.style.overflowY = "auto";
     expandedContainer.style.display = "block";
 }
 
 function closeImage() {
     var expandedContainer = document.getElementById("expandedImageContainer");
     var expandedExplanation = document.getElementById("expandedExplanation");
-    expandedExplanation.style.display = "none"; 
+    
     expandedContainer.style.display = "none";
 }
