@@ -41,5 +41,29 @@
             <div id="expandedExplanation" class="explanation"></div>
         </div>
     </div>
+    <div class="footer-card">
+        <div>
+            <a href="{{ url_for('user_agreements') }}" class="user-agreements-link" rel="noopener noreferrer" style="color: rgb(255, 255, 255);">
+                User Agreements - Terms - Privacy Policies.
+            </a>
+        </div>
+        <br>
+        <div>
+            © 2024 Iván Luna. Software Developer.
+        </div>
+        <div class="socials-container">
+            <a href="https://ivanluna.dev" target="_blank" rel="noopener noreferrer">
+                <img class="ivanlunadev-social" src="{{ url_for('static', filename='images/icons/ivanlunadev.png') }}" alt="Ivan Luna Dev"/>
+            </a>
+            
+            <a href="https://github.com/imprvhub" target="_blank" rel="noopener noreferrer">
+                <img class="github-social" src="{{ url_for('static', filename='images/icons/Font_Awesome_5_brands_github-square.png') }}" alt="GitHub"/>
+            </a>
+            
+            <a href="https://linkedin.com/in/ivanluna-dev" target="_blank" rel="noopener noreferrer">
+                <img class="linkedin-social" src="{{ url_for('static', filename='images/icons/Font_Awesome_5_brands_linkedin.png') }}" alt="LinkedIn"/>
+            </a>
+        </div>
+    </div>
 </body>
 </html>

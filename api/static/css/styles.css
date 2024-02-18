@@ -69,6 +69,20 @@ body {
         box-sizing: border-box;
     }
 
+    .footer-card {
+        backdrop-filter: blur(25px) saturate(200%);
+        -webkit-backdrop-filter: blur(25px) saturate(200%);
+        background-color: rgba(24, 24, 25, 0.6);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        max-width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
 #expandIconContainer {
     position: relative;
     text-align: center;
@@ -162,6 +176,9 @@ body {
     .card {
         max-width: 280px;
     }
+    .footer-card {
+        max-width: 280px;
+    }
     .logo-style {
         width: 20px;
         height: 20px;
@@ -182,6 +199,9 @@ body {
     .card {
         max-width: 330px;
     }
+    .footer-card {
+        max-width: 330px;
+    }
     .logo-style {
         width: 36px;
         height: 36px;
@@ -200,6 +220,9 @@ body {
         font-size: 14px;
     }
     .card {
+        max-width: 380px;
+    }
+    .footer-card {
         max-width: 380px;
     }
     
@@ -223,6 +246,9 @@ body {
     .card {
         max-width: 600px;
     }
+    .footer-card {
+        max-width: 600px;
+    }
     
     .logo-style {
         width: 42px;
@@ -242,6 +268,9 @@ body {
         font-size: 18px;
     }
     .card {
+        max-width: 800px;
+    }
+    .footer-card {
         max-width: 800px;
     }
     
@@ -265,6 +294,9 @@ body {
     .card {
         max-width: 1200px;
     }
+    .footer-card {
+        max-width: 1200px;
+    }
     
     .logo-style {
         width: 50px;
@@ -284,6 +316,9 @@ body {
         font-size: 28px;
     }
     .card {
+        max-width: 1400px;
+    }
+    .footer-card {
         max-width: 1400px;
     }
     .logo-style {
