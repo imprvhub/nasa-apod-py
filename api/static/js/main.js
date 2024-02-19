@@ -52,16 +52,24 @@ function changeDate(offset) {
     var datePicker = document.getElementById("datePicker");
     var selectedDate = new Date(datePicker.value);
     selectedDate.setDate(selectedDate.getDate() + offset);
-    
-    var year = selectedDate.getFullYear();
-    var month = String(selectedDate.getMonth() + 1).padStart(2, '0');
-    var day = String(selectedDate.getDate()).padStart(2, '0');
-    
-    var newDate = `${year}-${month}-${day}`;
-    datePicker.value = newDate;
+    datePicker.value = selectedDate.toISOString().split('T')[0];
     updateImage();
 }
 
+function getRandomDate() {
+    var minDate = new Date('1995-06-16');
+    var currentDate = new Date();
+    var rangeInDays = (currentDate - minDate) / (1000 * 60 * 60 * 24);
+    var randomOffset = Math.floor(Math.random() * rangeInDays);
+    var randomDate = new Date(minDate.getTime() + randomOffset * 24 * 60 * 60 * 1000);
+    return randomDate.toISOString().split('T')[0];
+}
+
+function diceImage() {
+    var randomDate = getRandomDate();
+    document.getElementById("datePicker").value = randomDate;
+    updateImage();
+}
 
 function expandImage() {
     var expandedContainer = document.getElementById("expandedImageContainer");

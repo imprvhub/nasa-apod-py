@@ -3,6 +3,10 @@
     src: url('/static/fonts/QueensidesMedium-x30zV.ttf') format('truetype');
 }
 
+.hidden {
+    display: none;
+}
+
 .header {
     display: flex;
     align-items: center;

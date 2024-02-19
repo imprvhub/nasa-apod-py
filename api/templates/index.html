@@ -24,7 +24,9 @@
     <div class="card">
         <div id="imageContainer">
             <label class="paragraph" for="datePicker">Select a Date:</label>
-            <input type="date" id="datePicker" onchange="updateImage()" placeholder="YYYY-MM-DD" min="1995-06-16">
+            <div id="datePickerContainer">
+                <input type="date" id="datePicker" onchange="updateImage()" placeholder="YYYY-MM-DD" min="1995-06-16">
+            </div>
             {% for image in images %}
                 <img id="apodImage" src="{{ image.url }}" alt="{{ image.title }}" onclick="expandImage()">
                 <div id="explanation" class="explanation"><b>Description:</b> {{ image.explanation }}</div>                  
