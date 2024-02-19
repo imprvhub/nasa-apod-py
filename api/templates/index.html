@@ -23,15 +23,39 @@
     <h4 class="header-paragraph">A Python web application that fetches the astronomy picture of the day </h4>
     <h4 class="paragraph">from the NASA API based on the user-selected date.</h4>
     <div id="recommendations">
-        <label class="paragraph" for="recommendedApod">Featured NASA APOD:</label>
+        <label class="paragraph" for="recommendedApod">Featured NASA APOD Per Year:</label>
         <select id="recommendedApod" onchange="selectRecommendedDate()" style="text-align: center;">
-            <option class="paragraph" value="" selected disabled>Browse through our recommended picks</option>
-            <option class="paragraph" value="2005-03-03">03/03/2005 - 'Still Life with NGC 2170'</option>
+            <option class="paragraph" value="" selected disabled>Browse Through</option>
+            <option class="paragraph" value="1995-10-17">17/10/1995 - 'Galaxy Dwingeloo 1 Emerges'</option>
+            <option class="paragraph" value="1996-06-28">28/06/1996 - 'A Distant Galaxy In The Deep Field'</option>
+            <option class="paragraph" value="1997-10-27">27/10/1997 - 'Closeup Of Antennae Galaxy Collision'</option>
+            <option class="paragraph" value="1998-06-20">20/06/1998 - 'Pioneer 10: The First 6 Billion Miles'</option>
+            <option class="paragraph" value="1999-08-15">15/08/1999 - 'M104 - The Sombrero Galaxy'</option>
+            <option class="paragraph" value="2000-10-16">16/10/2000 - 'Dust And Gas Surrounding...'</option>
+            <option class="paragraph" value="2001-04-10">10/04/2001 - 'M51 - The Whirlpool Galaxy...'</option>
+            <option class="paragraph" value="2002-08-12">12/08/2002 - 'The Colors and Misterios Of Centaurus A'</option>
+            <option class="paragraph" value="2003-05-20">20/05/2003 - 'A Primordial Quasar'</option>
+            <option class="paragraph" value="2004-05-15">15/05/2004 - 'Arp 188 and the Tadpole's...'</option>
             <option class="paragraph" value="2005-03-24">24/03/2005 - 'Simeis 147: Supernova Remnant'</option>
+            <option class="paragraph" value="2006-05-21">21/05/2006 - 'An Intermediate Polar Binary System'</option>
+            <option class="paragraph" value="2007-11-23">23/11/2007 - 'The Medusa Nebula'</option>
+            <option class="paragraph" value="2008-02-03">03/02/2008 - 'Light Echoes From V838 Mon'</option>
             <option class="paragraph" value="2009-02-08">08/02/2009 - 'Inside the Eagle Nebula'</option>
+            <option class="paragraph" value="2010-04-25">25/04/2010 - 'Planetary Nebula MZ3: The Ant Nebula'</option>
+            <option class="paragraph" value="2011-02-14">14/02/2011 - 'The Rosette Nebula'</option>
+            <option class="paragraph" value="2012-10-14">14/10/2012 - 'The Hubble Extreme Deep Field'</option>
             <option class="paragraph" value="2013-04-22">22/04/2013 - 'The Horsehead Nebula...'</option>
-            <option class="paragraph" value="2014-09-28">28/09/2014 - 'Two Black Holes Dancing...'</option>
+            <option class="paragraph" value="2014-10-30">30/10/2014 - 'A Spectre In The Eastern Veil'</option>
+            <option class="paragraph" value="2015-09-11">11/09/2015 - 'A Giant Squid In The Flying Bat'</option>
+            <option class="paragraph" value="2016-03-30">30/03/2016 - 'NGC 6188 and NGC 6164'</option>
+            <option class="paragraph" value="2017-06-09">09/06/2017 - 'M27 - Not A Comet'</option>
+            <option class="paragraph" value="2018-10-14">14/10/2018 - 'Orion in Red and Blue'</option>
+            <option class="paragraph" value="2019-07-25">25/07/2019 - 'Cygnus Skyscape'</option>
+            <option class="paragraph" value="2020-03-02">02/03/2020 - 'Sharpless-308: The Dolphin Nebula'</option>
             <option class="paragraph" value="2021-06-16">16/06/2021 - 'Scorpius Enhanced'</option>
+            <option class="paragraph" value="2022-08-21">21/08/2022 - 'The Spinning Pulsar of the Crab Nebula'</option>
+            <option class="paragraph" value="2023-07-10">10/07/2023 - 'Stars, Dust and Nebula in NGC 6559'</option>
+            <option class="paragraph" value="2024-01-09">09/01/2024 - 'Thor's Helmet'</option>
         </select>
     </div>
     <br>
@@ -55,7 +79,7 @@
             {% for image in images %}
                 <img id="apodImage" src="{{ image.url }}" alt="{{ image.title }}" onclick="expandImage()">
                 <br>
-                <h3 id="title" class="apodTitle">'{{ image.title }}</h3>
+                <h3 id="title" class="apodTitle">'{{ image.title }}'</h3>
                 <div id="explanation" class="explanation"><b>Description:</b> {{ image.explanation }}</div>                  
             {% endfor %}
         </div>
