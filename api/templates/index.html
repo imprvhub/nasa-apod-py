@@ -21,14 +21,25 @@
         </a>
     </div>
     <h4 class="header-paragraph">A Python web application that fetches the astronomy picture of the day </h4>
-<h4 class="paragraph">from the NASA API based on the user-selected date.</h4>
-    
+    <h4 class="paragraph">from the NASA API based on the user-selected date.</h4>
+    <div id="recommendations">
+        <label class="paragraph" for="recommendedApod">Featured NASA APOD:</label>
+        <select id="recommendedApod" onchange="selectRecommendedDate()" style="text-align: center;">
+            <option class="paragraph" value="" selected disabled>Browse through our recommended picks</option>
+            <option class="paragraph" value="2005-03-24">24/03/2005 - 'Simeis 147: Supernova Remnant'</option>
+            <option class="paragraph" value="2021-06-16">16/06/2021 - 'Scorpius Enhanced'</option>
+            <option class="paragraph" value="2009-02-08">08/02/2009 - 'Inside the Eagle Nebula'</option>
+            <option class="paragraph" value="2005-03-03">03/03/2005 - 'Still Life with NGC 2170'</option>
+            <option class="paragraph" value="2013-04-22">22/04/2013 - 'The Horsehead Nebula in Infrared from Hubble'</option>
+        </select>
+    </div>
+    <br>
     <div class="card">
         <div id="imageContainer">
             <label class="paragraph" for="datePicker">Select a Date:</label>            
             <div id="datePickerContainer">
                 <div id="previousDate" onclick="changeDate(-1)">&lt;</div> 
-                <input type="date" id="datePicker" onchange="updateImage()" placeholder="YYYY-MM-DD" min="1995-06-16">
+                <input type="date" id="datePicker" onchange="updateImage()" placeholder="YYYY-MM-DD" min="1995-06-16" max="">
                 <div id="nextDate" onclick="changeDate(1)">&gt;</div>
             </div>  
             <div id="navigationArrows">
@@ -43,6 +54,7 @@
             {% for image in images %}
                 <img id="apodImage" src="{{ image.url }}" alt="{{ image.title }}" onclick="expandImage()">
                 <br>
+                <h3 id="title" class="apodTitle">'{{ image.title }}</h3>
                 <div id="explanation" class="explanation"><b>Description:</b> {{ image.explanation }}</div>                  
             {% endfor %}
         </div>
@@ -53,7 +65,7 @@
                 <label class="paragraph">Expand</label>
             </div>
         </div>
-    
+        
         <div id="expandedImageContainer" style="display: none;">
             <img id="expandedImage" src="" alt="">
             <div id="closeIcon" onclick="closeImage()">✕</div>

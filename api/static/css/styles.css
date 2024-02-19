@@ -3,6 +3,26 @@
     src: url('/static/fonts/QueensidesMedium-x30zV.ttf') format('truetype');
 }
 
+#datePicker {
+    background-color: transparent;
+    color: white;
+    font-family: inherit;
+    text-align: center;
+}
+
+#recommendedApod {
+    background-color: transparent;
+    color: white;
+    font-family: inherit;
+}
+
+.apodTitle {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
 .hidden {
     display: none;
 }

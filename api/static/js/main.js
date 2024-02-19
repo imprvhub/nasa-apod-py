@@ -5,9 +5,15 @@ window.flatpickr("#datePicker", {
     }
 });
 
+window.onload = function() {
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById("datePicker").setAttribute("max", today);
+};
+
 function updateImage() {
     var selectedDate = document.getElementById("datePicker").value;
     var imageElement = document.getElementById("apodImage");
+    var titleElement = document.getElementById("title");
     var expandIcon = document.getElementById("expandIcon");
     var explanation = document.getElementById("explanation");
     var expandedExplanation = document.getElementById("expandedExplanation");
@@ -33,18 +39,32 @@ function updateImage() {
             } else {
                 imageElement.src = data.url;
                 imageElement.alt = data.title;
+                if (titleElement !== null) {
+                    titleElement.innerText = data.title;
+                }
                 expandIcon.style.display = "inline";
             }
-            explanation.innerText = data.explanation;
-            expandedExplanation.innerText = data.explanation; 
+            if (explanation !== null) {
+                explanation.innerText = data.explanation;
+            }
+            if (expandedExplanation !== null) {
+                expandedExplanation.innerText = data.explanation;
+            }
         })
         .catch(error => {
             console.error("Error al procesar la solicitud:", error);
             imageElement.src = "static/images/image_not_found.jpeg";
             imageElement.alt = "Not Found";
+            if (titleElement !== null) {
+                titleElement.innerText = "";
+            }
             expandIcon.style.display = "none";
-            explanation.innerText = "";
-            expandedExplanation.innerText = ""; 
+            if (explanation !== null) {
+                explanation.innerText = "";
+            }
+            if (expandedExplanation !== null) {
+                expandedExplanation.innerText = "";
+            }
         });
 }
 
@@ -53,6 +73,12 @@ function changeDate(offset) {
     var selectedDate = new Date(datePicker.value);
     selectedDate.setDate(selectedDate.getDate() + offset);
     datePicker.value = selectedDate.toISOString().split('T')[0];
+    updateImage();
+}
+
+function selectRecommendedDate() {
+    var selectedDate = document.getElementById("recommendedApod").value;
+    document.getElementById("datePicker").value = selectedDate;
     updateImage();
 }
 
