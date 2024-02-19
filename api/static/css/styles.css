@@ -21,6 +21,12 @@
 
 }
 
+
+
+a {
+    text-decoration: none;
+}
+
 h1 {
     font-family: 'ConduitPersonalUseRegular', sans-serif;
     color: white;

@@ -16,7 +16,9 @@
         <a href="/" class="logo-link" rel="noopener noreferrer">
             <img class="logo-style" style="top:20px;" src="{{ url_for('static', filename='images/logos/logo512.png') }}" alt="Logo" width="50" height="50"/>
         </a>
+        <a href="/">
         <h1>Nasa Apod Viewer</h1>
+        </a>
     </div>
     <h4 class="paragraph">A Python web application that fetches the astronomy picture of the day </h4>
 <h4 class="paragraph">from the NASA API based on the user-selected date.</h4>
@@ -55,7 +57,7 @@
     </div>
     <div class="footer-card">
         <div>
-            <a href="{{ url_for('user_agreements') }}" class="paragraph" rel="noopener noreferrer" style="color: rgb(255, 255, 255);">
+            <a href="{{ url_for('user_agreements') }}" class="paragraph" rel="noopener noreferrer" style="text-decoration: underline; color: rgb(255, 255, 255);">
                 User Agreements - Terms - Privacy Policies
             </a>
         </div>
