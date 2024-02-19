@@ -13,11 +13,11 @@
 </head>
 <body>
     <div class="header">
+        <a href="/" class="logo-link" rel="noopener noreferrer">
+            <img class="logo-style" style="top:20px;" src="{{ url_for('static', filename='images/logos/logo512.png') }}" alt="Logo" width="50" height="50"/>
+        </a>
         <h1>Nasa Apod Viewer</h1>
     </div>
-    <a href="/" class="logo-link" rel="noopener noreferrer">
-        <img class="logo-style" style="top:20px;" src="{{ url_for('static', filename='images/logos/logo512.png') }}" alt="Logo" width="50" height="50"/>
-    </a>
     <h4 class="paragraph">A Python web application that fetches the astronomy picture of the day </h4>
 <h4 class="paragraph">from the NASA API based on the user-selected date.</h4>
     
@@ -32,7 +32,10 @@
         </div>
         <div id="navigationArrows">
             <div id="previousDate" onclick="changeDate(-1)">&lt;</div> 
-            <div id="expandIconContainer">
+            <div id="expandIconContainer"> 
+                <div id="diceIcon" onclick="diceImage()">
+                    <img src="static/images/icons/dice-icon.png" onclick="diceImage()" width="15" height="17" alt="Dice Icon">
+                </div>
                 <div id="expandIcon" onclick="expandImage()">
                     <img src="static/images/icons/expand-icon.png" width="13" height="15" alt="Expand Icon">
                 </div>
