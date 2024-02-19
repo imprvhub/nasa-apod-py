@@ -25,29 +25,34 @@
     
     <div class="card">
         <div id="imageContainer">
-            <label class="paragraph" for="datePicker">Select a Date:</label>
+            <label class="paragraph" for="datePicker">Select a Date:</label>            
             <div id="datePickerContainer">
+                <div id="previousDate" onclick="changeDate(-1)">&lt;</div> 
                 <input type="date" id="datePicker" onchange="updateImage()" placeholder="YYYY-MM-DD" min="1995-06-16">
-            </div>
+                <div id="nextDate" onclick="changeDate(1)">&gt;</div>
+            </div>  
+            <div id="navigationArrows">
+                <div id="expandIconContainer"> 
+                    <div id="diceIcon" onclick="diceImage()">
+                        <label class="shuffle-text">Or Shuffle </label>
+                        <br>
+                        <img src="static/images/icons/dice-icon.webp" onclick="diceImage()" width="13" height="15" class="icon-dice" alt="Dice Icon">
+                    </div>
+                </div>
+            </div> 
             {% for image in images %}
                 <img id="apodImage" src="{{ image.url }}" alt="{{ image.title }}" onclick="expandImage()">
+                <br>
                 <div id="explanation" class="explanation"><b>Description:</b> {{ image.explanation }}</div>                  
             {% endfor %}
         </div>
-        <div id="navigationArrows">
-            <div id="previousDate" onclick="changeDate(-1)">&lt;</div> 
-            <div id="expandIconContainer"> 
-                <div id="diceIcon" onclick="diceImage()">
-                    <img src="static/images/icons/dice-icon.png" onclick="diceImage()" width="15" height="17" alt="Dice Icon">
-                </div>
-                <div id="expandIcon" onclick="expandImage()">
-                    <img src="static/images/icons/expand-icon.png" width="13" height="15" alt="Expand Icon">
-                </div>
+        <div id="navigationArrows"></div>
+            <div id="expandIcon" onclick="expandImage()">
+                <img src="static/images/icons/expand-icon.webp" width="13" height="15" alt="Expand Icon">
+                <br>
+                <label class="paragraph">Expand</label>
             </div>
-            <div id="nextDate" onclick="changeDate(1)">&gt;</div>
         </div>
-        
-        <br>
     
         <div id="expandedImageContainer" style="display: none;">
             <img id="expandedImage" src="" alt="">
