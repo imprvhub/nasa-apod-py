@@ -198,11 +198,22 @@ body {
     align-items: center;
 }
 
+#expandIconContainer,
+#shareIcon {
+    margin: 0 10px; 
+}
+
 #navigationArrows div {
     cursor: pointer;
     color: white; 
     font-size: 20px;
     margin: 0 25px;
+}
+
+#iconContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
 
 #navigationArrows div:hover {
@@ -228,6 +239,16 @@ body {
     z-index: 1;
 }
 
+#iconContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+#expandIconContainer,
+#shareIcon {
+    margin: 0 10px; 
+}
 
 #expandedExplanation {
     font-size: 10px;

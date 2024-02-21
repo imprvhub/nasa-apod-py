@@ -82,11 +82,17 @@
                 <div id="explanation" class="explanation"><b>Description:</b> {{ image.explanation }}</div>                  
             {% endfor %}
         </div>
-        <div id="navigationArrows"></div>
+        <div id="iconContainer"></div>
+        <div id="expandIconContainer"> 
             <div id="expandIcon" onclick="expandImage()">
                 <img src="static/images/icons/expand-icon.webp" width="13" height="15" alt="Expand Icon">
                 <br>
                 <label class="paragraph">Expand</label>
+            </div>
+            <div id="shareIcon" onclick="">
+                <img src="static/images/icons/share-icon.webp" width="13" height="15" alt="Share Icon">
+                <br>
+                <label class="paragraph">Share</label>
             </div>
         </div>
         
