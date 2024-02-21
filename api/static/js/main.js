@@ -74,12 +74,16 @@ function changeDate(offset) {
     selectedDate.setDate(selectedDate.getDate() + offset);
     datePicker.value = selectedDate.toISOString().split('T')[0];
     updateImage();
+
+    
+    document.getElementById("recommendedApod").value = "";
 }
 
 function selectRecommendedDate() {
     var selectedDate = document.getElementById("recommendedApod").value;
     document.getElementById("datePicker").value = selectedDate;
-    updateImage();
+    updateImage(); 
+
 }
 
 function getRandomDate() {
@@ -89,12 +93,16 @@ function getRandomDate() {
     var randomOffset = Math.floor(Math.random() * rangeInDays);
     var randomDate = new Date(minDate.getTime() + randomOffset * 24 * 60 * 60 * 1000);
     return randomDate.toISOString().split('T')[0];
+
+    
 }
 
 function diceImage() {
     var randomDate = getRandomDate();
     document.getElementById("datePicker").value = randomDate;
     updateImage();
+
+    document.getElementById("recommendedApod").value = "";
 }
 
 function expandImage() {
