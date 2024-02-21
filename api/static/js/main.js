@@ -122,3 +122,22 @@ function closeImage() {
     
     expandedContainer.style.display = "none";
 }
+
+function shareCard() {
+    var imageUrl = document.getElementById("apodImage").src;
+    var imageTitle = document.getElementById("title").innerText;
+    var imageDescription = document.getElementById("explanation").innerText;
+
+
+    var cardHtml = `
+        <div>
+            <img src="${imageUrl}" alt="${imageTitle}">
+            <h2>${imageTitle}</h2>
+            <p>${imageDescription}</p>
+        </div>
+    `;
+
+    var cardWindow = window.open("", "_blank");
+    cardWindow.document.write(cardHtml);
+}
+
