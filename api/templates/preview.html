@@ -4,20 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Share Your APOD Card</title>
-    <script>
-        var imageUrl = "{{ image_url }}";
-        function openImageInNewTab(url) {
-            window.open(url, '_blank');
-        }
-    </script>
 </head>
 <body>
     <h1>Share Your APOD Card</h1>
-    <h2>{{ title }}</h2>
-    <a href="#" onclick="openImageInNewTab(imageUrl)">
-        <img src="{{ image_url }}" alt="Card Preview" style="max-width: 400px;">
-    </a>
-
+    <div>
+        <img src="{{ image_url }}" alt="{{ title }}" style="max-width: 400px;">
+        <h2>{{ title }}</h2>
+        <p>{{ description }}</p>
+    </div>
+    
     <h3>Share on:</h3>
     <ul>
         <li><a href="whatsapp://send?text=Check out this amazing APOD card! {{ title }} - {{ description }}: {{ image_url }}" target="_blank">WhatsApp</a></li>
@@ -25,5 +20,16 @@
         <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ image_url }}&quote={{ title }} - {{ description }}" target="_blank">Facebook</a></li>
         <li><a href="https://twitter.com/intent/tweet?url={{ image_url }}&text={{ title }} - {{ description }}" target="_blank">Twitter</a></li>
     </ul>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const imageUrl = params.get('image_url');
+        const title = params.get('title');
+        const description = params.get('description');
+        document.querySelector('img').setAttribute('src', imageUrl);
+        document.querySelector('img').setAttribute('alt', title);
+        document.querySelector('h2').textContent = title;
+        document.querySelector('p').textContent = description;
+    </script>
 </body>
 </html>

@@ -128,18 +128,12 @@ function shareCard() {
     var imageTitle = document.getElementById("title").innerText;
     var imageDescription = document.getElementById("explanation").innerText;
 
-    fetch(`/generate_card_screenshot?image_url=${imageUrl}&title=${encodeURIComponent(imageTitle)}&description=${encodeURIComponent(imageDescription)}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error generating card screenshot');
-            }
-            return response.blob();
-        })
-        .then(imageBlob => {
-            var imageUrl = URL.createObjectURL(imageBlob);
-            window.open(`/preview?url=${encodeURIComponent(imageUrl)}&title=${encodeURIComponent(imageTitle)}&description=${encodeURIComponent(imageDescription)}`);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+
+    var encodedImageUrl = encodeURIComponent(imageUrl);
+    var encodedImageTitle = encodeURIComponent(imageTitle);
+    var encodedImageDescription = encodeURIComponent(imageDescription);
+
+    var previewUrl = `/preview?image_url=${encodedImageUrl}&title=${encodedImageTitle}&description=${encodedImageDescription}`;
+    var cardWindow = window.open(previewUrl, "_blank");
 }
+
