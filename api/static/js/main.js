@@ -128,16 +128,18 @@ function shareCard() {
     var imageTitle = document.getElementById("title").innerText;
     var imageDescription = document.getElementById("explanation").innerText;
 
-
-    var cardHtml = `
-        <div>
-            <img src="${imageUrl}" alt="${imageTitle}">
-            <h2>${imageTitle}</h2>
-            <p>${imageDescription}</p>
-        </div>
-    `;
-
-    var cardWindow = window.open("", "_blank");
-    cardWindow.document.write(cardHtml);
+    fetch(`/generate_card_screenshot?image_url=${imageUrl}&title=${encodeURIComponent(imageTitle)}&description=${encodeURIComponent(imageDescription)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error generating card screenshot');
+            }
+            return response.blob();
+        })
+        .then(imageBlob => {
+            var imageUrl = URL.createObjectURL(imageBlob);
+            window.open(`/preview?url=${encodeURIComponent(imageUrl)}&title=${encodeURIComponent(imageTitle)}&description=${encodeURIComponent(imageDescription)}`);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
-
