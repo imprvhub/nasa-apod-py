@@ -14,7 +14,13 @@
     background-color: transparent;
     color: white;
     font-family: inherit;
+    text-align: center;
 }
+
+#recommendedApod option {
+    text-align: center;
+}
+
 
 .apodTitle {
     font-size: 12px;

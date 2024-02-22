@@ -1,3 +1,29 @@
+window.onload = function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('image_url')) {
+        initScript();
+    }
+};
+
+function initScript() {
+    const params = new URLSearchParams(window.location.search);
+    const imageUrl = params.get('image_url');
+    const title = params.get('title');
+    const description = params.get('description');
+    
+    if (imageUrl) {
+        document.getElementById('apodImage').setAttribute('src', imageUrl);
+    }
+    if (title) {
+        document.querySelector('img').setAttribute('alt', title);
+        document.querySelector('h2').textContent = title;
+    }
+    if (description) {
+        document.querySelector('p').textContent = description;
+    }
+}
+
+
 window.flatpickr("#datePicker", {
     minDate: "1995-06-16",
     onChange: function(selectedDates, dateStr, instance) {
@@ -137,3 +163,6 @@ function shareCard() {
     var cardWindow = window.open(previewUrl, "_blank");
 }
 
+window.onload = function() {
+    initScript();
+};

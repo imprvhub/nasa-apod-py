@@ -133,8 +133,10 @@ class Apod(NasaApiObject):
 
 @app.route('/')
 def apod_images():
-    picture = apod('2024-01-09')
-    return render_template('index.html', images=[picture])
+    params = request.args
+    if not params:
+        picture = apod('2024-01-09')
+        return render_template('index.html', images=[picture])
 
 @app.route('/update_image')
 def update_image():
