@@ -13,7 +13,7 @@ from functools import wraps
 load_dotenv()
 
 app = Flask(__name__)
-domain_url = os.getenv("DOMAIN_URL", "https://apod-nasa-viewer.vercel.app") 
+domain_url = "https://apod-nasa-viewer.vercel.app"
 hashids_salt = os.getenv("HASHIDS_SALT")
 hashids = Hashids(salt=hashids_salt, min_length=4)  
 connection = pymysql.connect(
