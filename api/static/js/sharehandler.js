@@ -11,11 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const facebookIcon = document.getElementById('facebook');
         const whatsappIcon = document.getElementById('whatsapp');
         const twitterIcon = document.getElementById('twitter');
-        const dribbbleIcon = document.getElementById('dribbble');
-        const linkedinIcon = document.getElementById('linkedin');
-        const instagramIcon = document.getElementById('instagram');
-        const pinterestIcon = document.getElementById('pinterest');
-        const youtubeIcon = document.getElementById('youtube');
+        const redditIcon = document.getElementById('reddit');
+        const emailIcon = document.getElementById('mail');
+
+        const title = 'Check out this amazing APOD card!';
+        const description = 'This APOD card was generated dynamically from NASA public API and I wanted to share it with you!';
+
 
         function shareOnFacebook() {
             const facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shortUrl);
@@ -28,44 +29,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function shareOnTwitter() {
-            const text = 'Check out this link: ' + shortUrl;
-            const twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
+            const twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shortUrl) + '&title=' + encodeURIComponent(title);
             window.open(twitterUrl, '_blank');
         }
 
-        function shareOnDribbble() {
-            const dribbbleUrl = 'https://dribbble.com/share?url=' + encodeURIComponent(shortUrl);
-            window.open(dribbbleUrl, '_blank');
+        function shareOnReddit() {
+            const redditUrl = 'https://www.reddit.com/submit?url=' + encodeURIComponent(shortUrl) + '&title=' + encodeURIComponent(title);
+            window.open(redditUrl, '_blank');
         }
-
-        function shareOnLinkedIn() {
-            const linkedInUrl = 'https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(shortUrl);
-            window.open(linkedInUrl, '_blank');
+        
+        function shareViaEmail() {
+            const subject = 'Check out this amazing APOD card!';
+            const emailBody = 'This APOD card was generated dynamically from NASA public API and I wanted to share it with you! ' + shortUrl;
+            const emailUrl = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(emailBody);
+            window.open(emailUrl);
         }
-
-        function shareOnInstagram() {
-            const instagramUrl = 'https://www.instagram.com/share?url=' + encodeURIComponent(shortUrl);
-            window.open(instagramUrl, '_blank');
-        }
-
-        function shareOnPinterest() {
-            const pinterestUrl = 'https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(shortUrl);
-            window.open(pinterestUrl, '_blank');
-        }
-
-        function shareOnYoutube() {
-            const youtubeUrl = 'https://www.youtube.com/watch?v=' + encodeURIComponent(shortUrl);
-            window.open(youtubeUrl, '_blank');
-        }
+        
 
         facebookIcon.addEventListener('click', shareOnFacebook);
         whatsappIcon.addEventListener('click', shareOnWhatsApp);
         twitterIcon.addEventListener('click', shareOnTwitter);
-        dribbbleIcon.addEventListener('click', shareOnDribbble);
-        linkedinIcon.addEventListener('click', shareOnLinkedIn);
-        instagramIcon.addEventListener('click', shareOnInstagram);
-        pinterestIcon.addEventListener('click', shareOnPinterest);
-        youtubeIcon.addEventListener('click', shareOnYoutube);
+        redditIcon.addEventListener('click', shareOnReddit);
+        emailIcon.addEventListener('click', shareViaEmail);
     })
     .catch(error => console.error('Error:', error));
 });
