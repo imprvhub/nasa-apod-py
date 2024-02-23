@@ -342,6 +342,12 @@ body {
 }
 
 
+.paragraph-link {
+    color: white; 
+    text-decoration: underline;
+}
+
+
 
 /* MobileS (320px) */
 @media (max-width: 320px) {
