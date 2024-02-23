@@ -7,15 +7,18 @@ import logging
 from dotenv import load_dotenv
 import os
 import pymysql
+import random
+import string
 from hashids import Hashids
 from functools import wraps
+
 
 load_dotenv()
 
 app = Flask(__name__)
 domain_url = "https://apod-nasa-viewer.vercel.app"
-hashids_salt = os.getenv("HASHIDS_SALT")
-hashids = Hashids(salt=hashids_salt, min_length=4)  
+hashids_salt = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+hashids = Hashids(salt=hashids_salt, min_length=4)
 connection = pymysql.connect(
         host=os.getenv("DATABASE_HOST"),
         user=os.getenv("DATABASE_USERNAME"),
@@ -184,12 +187,11 @@ def update_image():
 @app.route('/preview', methods=['GET', 'POST'])
 def card_preview():
     if request.method == 'POST':
-        original_url = request.form.get('original_url')  
-        short_url_id = 1 
-        hashid_input = f"{hashids_salt}-{short_url_id}"
-        short_url = "https://apod-nasa-viewer.vercel.app/" + hashids.encode(hashid_input)
-        save_to_database(original_url, short_url)  
-        return jsonify({'short_url': short_url}) 
+        original_url = request.form.get('original_url')
+        short_url_id = random.randint(1000, 9999) 
+        short_url = "https://apod-nasa-viewer.vercel.app/" + hashids.encode(short_url_id)
+        save_to_database(original_url, short_url)
+        return jsonify({'short_url': short_url})
     else:
         try:
             selected_date = request.args.get('date')
