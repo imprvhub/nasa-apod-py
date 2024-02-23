@@ -1,17 +1,17 @@
-from flask import Flask, render_template, request, jsonify, redirect
-import requests
-from PIL import Image
-from io import BytesIO
 import datetime
+from datetime import date
 import logging
-from dotenv import load_dotenv
 import os
+from functools import wraps
+from io import BytesIO
+import string 
 import pymysql
 import random
-import string
+import requests
+from PIL import Image
+from dotenv import load_dotenv
+from flask import Flask, jsonify, redirect, render_template, request
 from hashids import Hashids
-from functools import wraps
-
 
 load_dotenv()
 
@@ -162,7 +162,8 @@ class Apod(NasaApiObject):
 def apod_images():
     params = request.args
     if not params:
-        picture = apod('2024-01-09')
+        today = date.today().strftime('%Y-%m-%d')
+        picture = apod(today)
         return render_template('index.html', images=[picture])
 
 @app.route('/update_image')
