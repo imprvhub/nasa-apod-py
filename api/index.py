@@ -200,23 +200,16 @@ def save_to_database(original_url, short_url):
         cursor.execute("INSERT INTO urls (original_url, short_url) VALUES (%s, %s)", (original_url, short_url))
     connection.commit()
 
-@app.route('/<short_url>')
-def redirect_to_original_url(short_url):
-    original_url = get_original_url_from_short_url(short_url)
-    if original_url:
-        return redirect(original_url)
-    else:
-        return "URL no encontrada", 404
-
-def get_original_url_from_short_url(short_url):
+@app.route('/<short_code>')
+def redirect_to_original_url(short_code):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT original_url FROM urls WHERE short_url = %s", (short_url,))
+        cursor.execute("SELECT original_url FROM urls WHERE short_url = %s", (f"{domain_url}/{short_code}",))
         result = cursor.fetchone()
         if result:
-            return result[0]
+            original_url = result[0]
+            return redirect(original_url)
         else:
-            return None
-
+            return "URL no encontrada", 404
 
 @app.route('/user_agreements')
 def user_agreements():
