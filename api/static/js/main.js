@@ -3,6 +3,19 @@ window.onload = function() {
     if (params.has('image_url')) {
         initScript();
     }
+
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById("datePicker").setAttribute("max", today);
+
+    window.flatpickr("#datePicker", {
+        minDate: "1995-06-16",
+        maxDate: today,
+        onChange: function(selectedDates, dateStr, instance) {
+            updateImage();
+        }
+    });
+
+    initScript();
 };
 
 function initScript() {
@@ -32,19 +45,6 @@ function initScript() {
         }
     }
 }
-
-
-window.flatpickr("#datePicker", {
-    minDate: "1995-06-16",
-    onChange: function(selectedDates, dateStr, instance) {
-        updateImage();
-    }
-});
-
-window.onload = function() {
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementById("datePicker").setAttribute("max", today);
-};
 
 function updateImage() {
     var selectedDate = document.getElementById("datePicker").value;
@@ -172,7 +172,3 @@ function shareCard() {
     var previewUrl = `/preview?image_url=${encodedImageUrl}&title=${encodedImageTitle}&description=${encodedImageDescription}`;
     var cardWindow = window.open(previewUrl, "_blank");
 }
-
-window.onload = function() {
-    initScript();
-};
