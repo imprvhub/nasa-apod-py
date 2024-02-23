@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/params.js') }}"></script>
     <script src="{{ url_for('static', filename='js/sharehandler.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -31,7 +30,7 @@
         </div>
         <div id="imageContainer">
             <div class="card">
-                <h3 id="title" class="apodTitle">'{{ title }}'</h3>
+                <h2 id="title" class="apodTitle">'{{ title }}'</h2>
                 <img id="apodImage" src="{{ image_url }}" alt="{{ title }}" style="max-width: 400px;" onclick="expandImage()">
                 <div class="paragraph">Press The Apod To Expand</div>
                 <div id="explanation" class="explanation">{{ description }}</div>
@@ -110,6 +109,29 @@
     toggle.addEventListener("click",()=>{
     menu.classList.toggle("active");
     })
+</script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+const imageUrl = params.get('image_url');
+const title = params.get('title');
+const description = params.get('description');
+
+
+const imageElement = document.getElementById('apodImage');
+if (imageElement) {
+    imageElement.setAttribute('src', imageUrl);
+}
+
+const titleElement = document.querySelector('h2');
+if (titleElement) {
+    titleElement.textContent = title;
+}
+
+const descriptionElement = document.querySelector('p');
+if (descriptionElement) {
+    descriptionElement.textContent = description;
+}
+
 </script>
 </body>
 </html>

@@ -10,16 +10,26 @@ function initScript() {
     const imageUrl = params.get('image_url');
     const title = params.get('title');
     const description = params.get('description');
-    
+
     if (imageUrl) {
-        document.getElementById('apodImage').setAttribute('src', imageUrl);
+        const imageElement = document.getElementById('apodImage');
+        if (imageElement) {
+            imageElement.setAttribute('src', imageUrl);
+        }
     }
+
     if (title) {
-        document.querySelector('img').setAttribute('alt', title);
-        document.querySelector('h2').textContent = title;
+        const titleElement = document.querySelector('h2');
+        if (titleElement) {
+            titleElement.textContent = title;
+        }
     }
+
     if (description) {
-        document.querySelector('p').textContent = description;
+        const descriptionElement = document.querySelector('p');
+        if (descriptionElement) {
+            descriptionElement.textContent = description;
+        }
     }
 }
 
