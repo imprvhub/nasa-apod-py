@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 import requests
 from PIL import Image
 from io import BytesIO
@@ -154,6 +154,15 @@ class Apod(NasaApiObject):
         if self._image is None:
             self._image = Image.open(BytesIO(requests.get(self.url).content))
         return self._image
+    
+def get_original_url_from_short_url(short_url):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT original_url FROM urls WHERE short_url = %s", (short_url,))
+        result = cursor.fetchone()
+        if result:
+            return result[0]  
+        else:
+            return None 
 
 @app.route('/')
 def apod_images():
@@ -195,6 +204,14 @@ def save_to_database(original_url, short_url):
     with connection.cursor() as cursor:
         cursor.execute("INSERT INTO urls (original_url, short_url) VALUES (%s, %s)", (original_url, short_url))
     connection.commit()
+
+@app.route('/<short_url>')
+def redirect_to_original_url(short_url):
+    original_url = get_original_url_from_short_url(short_url)
+    if original_url:
+        return redirect(original_url)
+    else:
+        return "URL no encontrada", 404
 
 @app.route('/user_agreements')
 def user_agreements():
