@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(response => response.json())
     .then(data => {
-        const shortUrl = data.short_url;
+        let shortUrl = data.short_url;
+        if (originalUrl.startsWith('http://127.0.0.1:5000/')) {
+            shortUrl = shortUrl.replace('http://127.0.0.1:5000/', 'https://apod-nasa-viewer.vercel.app/');
+        }
         const facebookIcon = document.getElementById('facebook');
         const whatsappIcon = document.getElementById('whatsapp');
         const twitterIcon = document.getElementById('twitter');
