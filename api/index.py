@@ -163,9 +163,10 @@ def get_original_url_from_short_url(short_url):
         cursor.execute("SELECT original_url FROM urls WHERE short_url = %s", (short_url,))
         result = cursor.fetchone()
         if result:
-            return result[0]  
+            return result[0]
         else:
-            return None 
+            return None
+
 
 @app.route('/')
 def apod_images():
