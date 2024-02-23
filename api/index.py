@@ -185,7 +185,8 @@ def update_image():
 def card_preview():
     if request.method == 'POST':
         original_url = request.form.get('original_url')  
-        short_url = "https://apod-nasa-viewer.vercel.app/" + hashids.encode(1)
+        short_code = generate_short_code()
+        short_url = "https://apod-nasa-viewer.vercel.app/" + short_code
         save_to_database(original_url, short_url)  
         return jsonify({'short_url': short_url}) 
     else:
@@ -199,6 +200,15 @@ def card_preview():
         except Exception as e:
             print(f"Error: {str(e)}")
             return render_template('preview.html', image_url='', title='', description='')
+        
+def generate_short_code():
+    with connection.cursor() as cursor:
+        cursor.execute("INSERT INTO urls (original_url) VALUES ('')")
+        short_code_id = cursor.lastrowid  
+    short_code_salt = os.getenv("HASHIDS_SALT")
+    hashids = Hashids(salt=short_code_salt, min_length=4)
+    short_code = hashids.encode(short_code_id)
+    return short_code
 
 def save_to_database(original_url, short_url):
     with connection.cursor() as cursor:
