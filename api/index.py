@@ -4,10 +4,34 @@ from PIL import Image
 from io import BytesIO
 import datetime
 import logging
+from dotenv import load_dotenv
 import os
+import pymysql
+from hashids import Hashids
 from functools import wraps
 
+load_dotenv()
+
 app = Flask(__name__)
+domain_url = os.getenv("DOMAIN_URL", "https://apod-nasa-viewer.vercel.app") 
+hashids_salt = os.getenv("HASHIDS_SALT")
+hashids = Hashids(salt=hashids_salt, min_length=4)  
+connection = pymysql.connect(
+        host=os.getenv("DATABASE_HOST"),
+        user=os.getenv("DATABASE_USERNAME"),
+        passwd=os.getenv("DATABASE_PASSWORD"),
+        db=os.getenv("DATABASE"),
+        ssl={"ssl_accept": "strict"}
+    )
+
+with connection.cursor() as cursor:
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS urls (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                original_url VARCHAR(255) NOT NULL,
+                short_url VARCHAR(255) NOT NULL
+            )
+        """)
 
 class NasaApiException(Exception):
     """Raised for any exception caused by a call to the Nasa API"""
@@ -148,18 +172,29 @@ def update_image():
         print(f"Error: {str(e)}")
         return jsonify({'error': 'Image not found'}), 404
         
-@app.route('/preview')
+@app.route('/preview', methods=['GET', 'POST'])
 def card_preview():
-    try:
-        selected_date = request.args.get('date')
-        picture = apod(selected_date)
-        imageUrl = picture.url
-        imageTitle = picture.title
-        imageDescription = 'Description: ' + picture.explanation
-        return render_template('preview.html', image_url=imageUrl, title=imageTitle, description=imageDescription)
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        return render_template('preview.html', image_url='', title='', description='')
+    if request.method == 'POST':
+        original_url = request.form.get('original_url')  
+        short_url = "https://apod-nasa-viewer.vercel.app/" + hashids.encode(1)
+        save_to_database(original_url, short_url)  
+        return jsonify({'short_url': short_url}) 
+    else:
+        try:
+            selected_date = request.args.get('date')
+            picture = apod(selected_date)
+            imageUrl = picture.url
+            imageTitle = picture.title
+            imageDescription = 'Description: ' + picture.explanation
+            return render_template('preview.html', image_url=imageUrl, title=imageTitle, description=imageDescription)
+        except Exception as e:
+            print(f"Error: {str(e)}")
+            return render_template('preview.html', image_url='', title='', description='')
+
+def save_to_database(original_url, short_url):
+    with connection.cursor() as cursor:
+        cursor.execute("INSERT INTO urls (original_url, short_url) VALUES (%s, %s)", (original_url, short_url))
+    connection.commit()
 
 @app.route('/user_agreements')
 def user_agreements():
