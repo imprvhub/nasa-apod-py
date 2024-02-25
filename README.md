@@ -1,14 +1,10 @@
 # Welcome to the [Nasa Apod Viewer](https://apod-nasa-viewer.vercel.app/) Project.
 
-A Python web application for fetching NASA's Astronomy Picture of the Day, shareable as APOD cards.
+This project is a Python web application built with Flask. It fetches NASA's Astronomy Picture of the Day (APOD) from the NASA API and provides functionalities to view and share the images as APOD cards.
 
 Visit the live app: [apod-nasa-viewer.vercel.app](https://apod-nasa-viewer.vercel.app)
 
-## About
-
-This project is a Python web application built with Flask. It fetches NASA's Astronomy Picture of the Day (APOD) from the NASA API and provides functionalities to view and share the images as APOD cards.
-
-## Features
+## Key Features
 
 - Fetches the Astronomy Picture of the Day from the NASA API.
 - Enables users to explore APOD images via a calendar navigation or by searching for specific dates.
@@ -16,16 +12,7 @@ This project is a Python web application built with Flask. It fetches NASA's Ast
 - Showcases a curated selection of the finest APOD images from 1995 (the inception year of APOD) to the present via the 'Featured NASA APOD per year' Recommendations section.
 - Generates shareable APOD cards comprising the retrieved image, title, and description.
 
-## Table of Contents
-
-- [About](#about)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Feedback & Support](#feedback--support)
-- [License](#license)
-
-## Installation
+## Installation and Usage
 
 To run this project locally, follow these steps:
 
@@ -56,16 +43,18 @@ To run this project locally, follow these steps:
    cd api
    python3 index.py
    ```
+   Then it should be accessible at
+    ```bash
+   http://localhost:5000/
+   ```
 
-## Usage
-
-Once the application is running locally, you can access it in your web browser at 'http://localhost:5000/'.
 
 ## Feedback & Support
+Your input matters, and I'm ready to help address any inquiries or feedback you may have. Your contributions are essential for refining the project and enhancing the overall user experience. Don't hesitate to get in touch with me:
 
-Your feedback is valuable! If you encounter any issues or have suggestions for improvements, please create a new GitHub issue in this repository.
+Feel free to share your insights, recommendations, or suggestions for continuous improvement. If you encounter any challenges or require assistance, please [create a new GitHub issue](https://github.com/imprvhub/nasa-apod-viewer/issues/new). Be sure to provide a detailed description of your issue to facilitate prompt and precise support.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/imprvhub/nasa-apod-viewer/blob/main/LICENSE.md) file for details.
 
