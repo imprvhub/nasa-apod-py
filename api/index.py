@@ -163,7 +163,7 @@ def apod_images():
     params = request.args
     if not params:
         today = date.today().strftime('%Y-%m-%d')
-        picture = apod('2024-02-25')
+        picture = apod(today)
         return render_template('index.html', images=[picture])
 
 @app.route('/update_image')
