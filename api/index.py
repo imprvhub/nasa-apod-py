@@ -163,14 +163,14 @@ def apod_images():
     params = request.args
     if not params:
         today = date.today().strftime('%Y-%m-%d')
-        picture = apod(today)
+        picture = apod('2024-02-27')
         return render_template('index.html', images=[picture])
 
 @app.route('/update_image')
 def update_image():
     try:
         selected_date = request.args.get('date')
-        picture = apod('2024-02-27')
+        picture = apod(selected_date)
         return jsonify({'url': picture.url, 'title': picture.title, 'explanation': picture.explanation})
     except Exception as e:
         print(f"Error: {str(e)}")
