@@ -163,7 +163,8 @@ def apod_images():
     params = request.args
     if not params:
         today = date.today().strftime('%Y-%m-%d')
-        picture = apod('2024-02-27')
+        picture = apod(today)
+        #TO-DO: implement auto-detection for when apod is youtube or gif
         return render_template('index.html', images=[picture])
 
 @app.route('/update_image')
