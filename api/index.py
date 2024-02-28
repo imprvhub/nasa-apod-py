@@ -170,7 +170,7 @@ def apod_images():
 def update_image():
     try:
         selected_date = request.args.get('date')
-        picture = apod(selected_date)
+        picture = apod('2024-02-27')
         return jsonify({'url': picture.url, 'title': picture.title, 'explanation': picture.explanation})
     except Exception as e:
         print(f"Error: {str(e)}")
