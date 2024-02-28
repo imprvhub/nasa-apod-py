@@ -159,6 +159,10 @@ function closeImage() {
     expandedContainer.style.display = "none";
 }
 
+function closeTab() {
+    window.close();
+}
+
 function shareCard() {
     var imageUrl = document.getElementById("apodImage").src;
     var imageTitle = document.getElementById("title").innerText;
