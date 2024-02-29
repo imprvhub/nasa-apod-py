@@ -7,6 +7,7 @@ from io import BytesIO
 import string 
 import pymysql
 import random
+import pytz
 import requests
 from PIL import Image
 from dotenv import load_dotenv
@@ -162,9 +163,13 @@ class Apod(NasaApiObject):
 def apod_images():
     params = request.args
     if not params:
-        today = date.today().strftime('%Y-%m-%d')
+        now_utc = datetime.datetime.utcnow()
+        eastern_timezone = pytz.timezone('US/Eastern')
+        now_eastern = now_utc.astimezone(eastern_timezone)
+        if now_eastern.hour < 12:
+            now_eastern -= datetime.timedelta(days=1)
+        today = now_eastern.strftime('%Y-%m-%d')
         picture = apod(today)
-        #TO-DO: implement auto-detection for when apod is youtube or gif
         return render_template('index.html', images=[picture])
 
 @app.route('/update_image')
