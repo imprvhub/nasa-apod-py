@@ -1,5 +1,4 @@
-import datetime
-from datetime import date
+from datetime import datetime, timedelta 
 import logging
 import os
 from functools import wraps
@@ -7,7 +6,7 @@ from io import BytesIO
 import string 
 import pymysql
 import random
-import pytz
+from pytz import timezone 
 import requests
 from PIL import Image
 from dotenv import load_dotenv
@@ -91,10 +90,11 @@ def optional_date(input):
 
 def nasa_date(input):
     try:
-        datetime.datetime.strptime(input, '%Y-%m-%d')
+        datetime.strptime(input, '%Y-%m-%d')
         return input
     except ValueError:
         raise ValueError('Incorrect date format, should be YYYY-MM-DD')
+
 
 @optional
 def optional_int(input):
@@ -164,12 +164,11 @@ class Apod(NasaApiObject):
 def apod_images():
     params = request.args
     if not params:
-        now_utc = datetime.datetime.utcnow()
-        eastern_timezone = pytz.timezone('US/Eastern')
-        now_eastern = now_utc.astimezone(eastern_timezone)
+        eastern_timezone = timezone('US/Eastern')
+        now_eastern = datetime.now(eastern_timezone)
         if now_eastern.hour < 12:
-            now_eastern -= datetime.timedelta(days=1)
-        today = now_eastern.strftime('%Y-%m-%d')
+            now_eastern -= timedelta(days=1)
+        today = datetime.now(eastern_timezone).strftime('%Y-%m-%d')
         picture = apod(today)
         return render_template('index.html', images=[picture])
 
