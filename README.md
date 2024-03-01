@@ -2,7 +2,14 @@
 
 This project is a Python web application built with Flask. It fetches NASA's Astronomy Picture of the Day (APOD) from the NASA API and provides functionalities to view and share the images as APOD cards.
 
+## Demo
+
 Visit the live app: [apod-nasa-viewer.vercel.app](https://apod-nasa-viewer.vercel.app)
+
+## Preview
+
+![Preview](./api/static/images/preview.png "Preview")
+
 
 ## Key Features
 
