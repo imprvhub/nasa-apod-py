@@ -159,6 +159,7 @@ class Apod(NasaApiObject):
             self._image = Image.open(BytesIO(requests.get(self.url).content))
         return self._image
     
+# routes    
 @app.route('/')
 def apod_images():
     params = request.args
