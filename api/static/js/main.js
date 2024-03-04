@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
     const params = new URLSearchParams(window.location.search);
     if (params.has('image_url')) {
         initScript();
@@ -16,7 +16,7 @@ window.onload = function() {
     });
 
     initScript();
-};
+});
 
 function initScript() {
     const params = new URLSearchParams(window.location.search);
@@ -24,7 +24,9 @@ function initScript() {
     const title = params.get('title');
     const description = params.get('description');
 
-    if (imageUrl) {
+    const isIframe = document.getElementById('apodImage').tagName === 'IFRAME';
+
+    if (imageUrl && !isIframe) {
         const imageElement = document.getElementById('apodImage');
         if (imageElement) {
             imageElement.setAttribute('src', imageUrl);
@@ -62,72 +64,95 @@ function updateImage() {
             return response.json();
         })
         .then(data => {
+            // Verificar si la URL es de YouTube
             if (data.url.includes("youtube.com")) {
                 var videoId = data.url.split('/').pop();
                 var iframe = document.createElement("iframe");
-                iframe.width = "400";
-                iframe.height = "300";
+                iframe.width = "560";
+                iframe.height = "315";
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
                 iframe.allowFullscreen = true;
-        
-                // Reemplazar imagen con iframe
-                imageElement.parentNode.replaceChild(iframe, imageElement);
-                
-                // Mostrar elementos de título y explicación cuando se carga un video de YouTube
-                if (titleElement !== null) {
+
+                // Reemplazar el elemento existente con el nuevo iframe si es necesario
+                if (imageElement && imageElement.tagName === "IFRAME") {
+                    if (imageElement.src !== iframe.src) {
+                        imageElement.src = iframe.src;
+                    }
+                } else {
+                    if (imageElement && imageElement.parentNode) {
+                        imageElement.parentNode.replaceChild(iframe, imageElement);
+                    }
+                }
+
+                // Actualizar el título y la explicación
+                if (titleElement) {
+                    titleElement.textContent = data.title;
                     titleElement.style.display = "block";
                 }
-                if (explanation !== null) {
+                if (explanation) {
+                    explanation.textContent = data.explanation;
                     explanation.style.display = "block";
                 }
-                // Mostrar o ocultar el icono de expansión según sea necesario
-                if (expandIcon !== null) {
+                if (expandIcon) {
                     expandIcon.style.display = "inline";
                 }
             } else {
-                imageElement.src = data.url;
-                imageElement.alt = data.title;
-        
-                // Actualizar título y explicación solo cuando se carga una imagen
-                if (titleElement !== null && data.title) {
+                // Crear un nuevo elemento de imagen
+                var newImageElement = document.createElement("img");
+                newImageElement.id = "apodImage";
+                newImageElement.src = data.url;
+                newImageElement.alt = data.title;
+
+                // Reemplazar el elemento existente con la nueva imagen si es necesario
+                if (imageElement && imageElement.tagName === "IMG") {
+                    if (imageElement.src !== newImageElement.src) {
+                        imageElement.src = newImageElement.src;
+                    }
+                } else {
+                    if (imageElement && imageElement.parentNode) {
+                        imageElement.parentNode.replaceChild(newImageElement, imageElement);
+                    }
+                }
+
+                // Actualizar el título y la explicación
+                if (titleElement && data.title) {
                     titleElement.innerText = data.title;
-                    titleElement.style.display = "block"; // Asegurarse de que estén visibles
+                    titleElement.style.display = "block";
                 }
-                if (explanation !== null && data.explanation) {
+                if (explanation && data.explanation) {
                     explanation.innerText = data.explanation;
-                    explanation.style.display = "block"; // Asegurarse de que estén visibles
+                    explanation.style.display = "block";
                 }
-                if (expandedExplanation !== null && data.explanation) {
+                if (expandedExplanation && data.explanation) {
                     expandedExplanation.innerText = data.explanation;
                 }
-                // Mostrar o ocultar el icono de expansión según sea necesario
-                if (expandIcon !== null) {
+                if (expandIcon) {
                     expandIcon.style.display = "block";
                 }
             }
         })
-        
-
         .catch(error => {
             console.error("Error al procesar la solicitud:", error);
-            // Manejo de errores
-            imageElement.src = "static/images/image_not_found.jpeg";
-            imageElement.alt = "Not Found";
-            if (titleElement !== null) {
+            if (imageElement) {
+                imageElement.src = "static/images/image_not_found.jpeg";
+                imageElement.alt = "Not Found";
+            }
+            if (titleElement) {
                 titleElement.innerText = "";
             }
-            // Ocultar el icono de expansión
-            if (expandIcon !== null) {
+            if (expandIcon) {
                 expandIcon.style.display = "none";
             }
-            if (explanation !== null) {
+            if (explanation) {
                 explanation.innerText = "";
             }
-            if (expandedExplanation !== null) {
+            if (expandedExplanation) {
                 expandedExplanation.innerText = "";
             }
         });
 }
+
+
 
 
 function changeDate(offset) {
@@ -137,7 +162,6 @@ function changeDate(offset) {
     datePicker.value = selectedDate.toISOString().split('T')[0];
     updateImage();
 
-    
     document.getElementById("recommendedApod").value = "";
 }
 
@@ -145,7 +169,6 @@ function selectRecommendedDate() {
     var selectedDate = document.getElementById("recommendedApod").value;
     document.getElementById("datePicker").value = selectedDate;
     updateImage(); 
-
 }
 
 function getRandomDate() {
@@ -155,8 +178,6 @@ function getRandomDate() {
     var randomOffset = Math.floor(Math.random() * rangeInDays);
     var randomDate = new Date(minDate.getTime() + randomOffset * 24 * 60 * 60 * 1000);
     return randomDate.toISOString().split('T')[0];
-
-    
 }
 
 function diceImage() {
