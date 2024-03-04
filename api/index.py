@@ -168,7 +168,7 @@ def apod_images():
         if now_eastern.hour < 12:
             now_eastern -= timedelta(days=1)
         today = datetime.now(eastern_timezone).strftime('%Y-%m-%d')
-        picture = apod("2024-03-02")
+        picture = apod(today)
         return render_template('index.html', images=[picture])
 
 @app.route('/update_image')

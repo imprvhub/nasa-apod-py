@@ -65,36 +65,61 @@ function updateImage() {
             if (data.url.includes("youtube.com")) {
                 var videoId = data.url.split('/').pop();
                 var iframe = document.createElement("iframe");
-                iframe.width = "600";
-                iframe.height = "600";
+                iframe.width = "400";
+                iframe.height = "300";
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
                 iframe.allowFullscreen = true;
-                imageElement.innerHTML = '';
-                imageElement.appendChild(iframe);
-                expandIcon.style.display = "inline";
+        
+                // Reemplazar imagen con iframe
+                imageElement.parentNode.replaceChild(iframe, imageElement);
+                
+                // Mostrar elementos de título y explicación cuando se carga un video de YouTube
+                if (titleElement !== null) {
+                    titleElement.style.display = "block";
+                }
+                if (explanation !== null) {
+                    explanation.style.display = "block";
+                }
+                // Mostrar o ocultar el icono de expansión según sea necesario
+                if (expandIcon !== null) {
+                    expandIcon.style.display = "inline";
+                }
             } else {
                 imageElement.src = data.url;
                 imageElement.alt = data.title;
-                if (titleElement !== null) {
+        
+                // Actualizar título y explicación solo cuando se carga una imagen
+                if (titleElement !== null && data.title) {
                     titleElement.innerText = data.title;
+                    titleElement.style.display = "block"; // Asegurarse de que estén visibles
                 }
-                expandIcon.style.display = "inline";
-            }
-            if (explanation !== null) {
-                explanation.innerText = data.explanation;
-            }
-            if (expandedExplanation !== null) {
-                expandedExplanation.innerText = data.explanation;
+                if (explanation !== null && data.explanation) {
+                    explanation.innerText = data.explanation;
+                    explanation.style.display = "block"; // Asegurarse de que estén visibles
+                }
+                if (expandedExplanation !== null && data.explanation) {
+                    expandedExplanation.innerText = data.explanation;
+                }
+                // Mostrar o ocultar el icono de expansión según sea necesario
+                if (expandIcon !== null) {
+                    expandIcon.style.display = "block";
+                }
             }
         })
+        
+
         .catch(error => {
             console.error("Error al procesar la solicitud:", error);
+            // Manejo de errores
             imageElement.src = "static/images/image_not_found.jpeg";
             imageElement.alt = "Not Found";
             if (titleElement !== null) {
                 titleElement.innerText = "";
             }
-            expandIcon.style.display = "none";
+            // Ocultar el icono de expansión
+            if (expandIcon !== null) {
+                expandIcon.style.display = "none";
+            }
             if (explanation !== null) {
                 explanation.innerText = "";
             }
@@ -103,6 +128,7 @@ function updateImage() {
             }
         });
 }
+
 
 function changeDate(offset) {
     var datePicker = document.getElementById("datePicker");
