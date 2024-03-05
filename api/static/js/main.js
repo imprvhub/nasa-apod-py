@@ -68,28 +68,23 @@ function updateImage() {
             if (data.url.includes("youtube.com")) {
                 var videoId = data.url.split('/').pop();
                 var iframe = document.createElement("iframe");
-                iframe.width = "560";
-                iframe.height = "315";
+                iframe.id = "apodImage";
+                iframe.width = "315";  // Corregido: Height asignado al width
+                iframe.height = "560"; // Corregido: Width asignado al height
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
                 iframe.allowFullscreen = true;
 
                 // Reemplazar el elemento existente con el nuevo iframe si es necesario
-                if (imageElement && imageElement.tagName === "IFRAME") {
-                    if (imageElement.src !== iframe.src) {
-                        imageElement.parentNode.replaceChild(iframe, imageElement);
-                    }
-                } else {
-                    if (imageElement && imageElement.parentNode) {
-                        imageElement.parentNode.replaceChild(iframe, imageElement);
-                    }
+                if (imageElement && imageElement.parentNode) {
+                    imageElement.parentNode.replaceChild(iframe, imageElement);
                 }
 
-                // Actualizar el título y la explicación
-                if (titleElement) {
+                // Mostrar el título y la explicación del iframe
+                if (titleElement && data.title) {
                     titleElement.textContent = data.title;
                     titleElement.style.display = "block";
                 }
-                if (explanation) {
+                if (explanation && data.explanation) {
                     explanation.textContent = data.explanation;
                     explanation.style.display = "block";
                 }
@@ -103,27 +98,22 @@ function updateImage() {
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
 
-                // Eliminar el iframe existente si es necesario
-                if (imageElement && imageElement.tagName === "IFRAME") {
-                    imageElement.parentNode.removeChild(imageElement);
-                }
-
-                // Reemplazar el elemento existente con la nueva imagen
+                // Reemplazar el elemento existente con la nueva imagen si es necesario
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(newImageElement, imageElement);
                 }
 
-                // Actualizar el título y la explicación
+                // Mostrar el título y la explicación de la imagen
                 if (titleElement && data.title) {
-                    titleElement.innerText = data.title;
+                    titleElement.textContent = data.title;
                     titleElement.style.display = "block";
                 }
                 if (explanation && data.explanation) {
-                    explanation.innerText = data.explanation;
+                    explanation.textContent = data.explanation;
                     explanation.style.display = "block";
                 }
                 if (expandedExplanation && data.explanation) {
-                    expandedExplanation.innerText = data.explanation;
+                    expandedExplanation.textContent = data.explanation;
                 }
                 if (expandIcon) {
                     expandIcon.style.display = "block";
@@ -150,7 +140,6 @@ function updateImage() {
             }
         });
 }
-
 
 
 
