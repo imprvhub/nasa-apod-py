@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
     const params = new URLSearchParams(window.location.search);
     if (params.has('image_url')) {
         initScript();
@@ -16,7 +16,7 @@ window.onload = function() {
     });
 
     initScript();
-};
+});
 
 function initScript() {
     const params = new URLSearchParams(window.location.search);
@@ -24,7 +24,9 @@ function initScript() {
     const title = params.get('title');
     const description = params.get('description');
 
-    if (imageUrl) {
+    const isIframe = document.getElementById('apodImage').tagName === 'IFRAME';
+
+    if (imageUrl && !isIframe) {
         const imageElement = document.getElementById('apodImage');
         if (imageElement) {
             imageElement.setAttribute('src', imageUrl);
@@ -65,44 +67,75 @@ function updateImage() {
             if (data.url.includes("youtube.com")) {
                 var videoId = data.url.split('/').pop();
                 var iframe = document.createElement("iframe");
-                iframe.width = "600";
-                iframe.height = "600";
+                iframe.id = "apodImage";
+                iframe.width = "560"; 
+                iframe.height = "400";
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
                 iframe.allowFullscreen = true;
-                imageElement.innerHTML = '';
-                imageElement.appendChild(iframe);
-                expandIcon.style.display = "inline";
-            } else {
-                imageElement.src = data.url;
-                imageElement.alt = data.title;
-                if (titleElement !== null) {
-                    titleElement.innerText = data.title;
+                iframe.style.width = "560px";
+                iframe.style.height = "315px";
+                if (imageElement && imageElement.parentNode) {
+                    imageElement.parentNode.replaceChild(iframe, imageElement);
                 }
-                expandIcon.style.display = "inline";
-            }
-            if (explanation !== null) {
-                explanation.innerText = data.explanation;
-            }
-            if (expandedExplanation !== null) {
-                expandedExplanation.innerText = data.explanation;
+
+                if (titleElement && data.title) {
+                    titleElement.textContent = data.title;
+                    titleElement.style.display = "block";
+                }
+                if (explanation && data.explanation) {
+                    explanation.textContent = data.explanation;
+                    explanation.style.display = "block";
+                }
+                if (expandIcon) {
+                    expandIcon.style.display = "inline";
+                }
+            } else {
+                var newImageElement = document.createElement("img");
+                newImageElement.id = "apodImage";
+                newImageElement.src = data.url;
+                newImageElement.alt = data.title;
+
+                if (imageElement && imageElement.parentNode) {
+                    imageElement.parentNode.replaceChild(newImageElement, imageElement);
+                }
+
+                if (titleElement && data.title) {
+                    titleElement.textContent = data.title;
+                    titleElement.style.display = "block";
+                }
+                if (explanation && data.explanation) {
+                    explanation.textContent = data.explanation;
+                    explanation.style.display = "block";
+                }
+                if (expandedExplanation && data.explanation) {
+                    expandedExplanation.textContent = data.explanation;
+                }
+                if (expandIcon) {
+                    expandIcon.style.display = "block";
+                }
             }
         })
         .catch(error => {
             console.error("Error al procesar la solicitud:", error);
-            imageElement.src = "static/images/image_not_found.jpeg";
-            imageElement.alt = "Not Found";
-            if (titleElement !== null) {
+            if (imageElement) {
+                imageElement.src = "static/images/image_not_found.jpeg";
+                imageElement.alt = "Not Found";
+            }
+            if (titleElement) {
                 titleElement.innerText = "";
             }
-            expandIcon.style.display = "none";
-            if (explanation !== null) {
+            if (expandIcon) {
+                expandIcon.style.display = "none";
+            }
+            if (explanation) {
                 explanation.innerText = "";
             }
-            if (expandedExplanation !== null) {
+            if (expandedExplanation) {
                 expandedExplanation.innerText = "";
             }
         });
 }
+
 
 function changeDate(offset) {
     var datePicker = document.getElementById("datePicker");
@@ -111,7 +144,6 @@ function changeDate(offset) {
     datePicker.value = selectedDate.toISOString().split('T')[0];
     updateImage();
 
-    
     document.getElementById("recommendedApod").value = "";
 }
 
@@ -119,7 +151,6 @@ function selectRecommendedDate() {
     var selectedDate = document.getElementById("recommendedApod").value;
     document.getElementById("datePicker").value = selectedDate;
     updateImage(); 
-
 }
 
 function getRandomDate() {
@@ -129,8 +160,6 @@ function getRandomDate() {
     var randomOffset = Math.floor(Math.random() * rangeInDays);
     var randomDate = new Date(minDate.getTime() + randomOffset * 24 * 60 * 60 * 1000);
     return randomDate.toISOString().split('T')[0];
-
-    
 }
 
 function diceImage() {
