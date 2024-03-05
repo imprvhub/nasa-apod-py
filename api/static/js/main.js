@@ -115,7 +115,12 @@ function updateImage() {
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
 
+                newImageElement.onload = function() {
+                    // Cuando la imagen se haya cargado, quita la clase de desenfoque
+                    newImageElement.classList.remove('blur');
+                };
 
+                newImageElement.classList.add('blur');
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(newImageElement, imageElement);
                 }

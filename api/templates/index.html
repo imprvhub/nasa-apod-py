@@ -84,7 +84,7 @@
                 {% if image.url.startswith('https://www.youtube.com/') %}
                     <iframe id="apodImage" width="560" height="315" src="{{ image.url }}" frameborder="0" allowfullscreen onload="hideLoader()"></iframe>
                 {% else %}
-                    <img id="apodImage" src="{{ image.url }}" alt="{{ image.title }}" onclick="expandImage()" onload="hideLoader()">
+                    <img id="apodImage" src="{{ image.url }}" alt="{{ image.title }}" onload="hideLoader()">
                 {% endif %}
                 <br>
                 <h3 id="title" class="apodTitle">'{{ image.title }}'</h3>

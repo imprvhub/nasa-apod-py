@@ -3,6 +3,13 @@
     src: url('/static/fonts/QueensidesMedium-x30zV.ttf') format('truetype');
 }
 
+.blur {
+    filter: blur(5px); /* Ajusta el valor según sea necesario */
+    transition: filter 0.5s ease; /* Agrega una transición para suavizar el efecto */
+}
+
+
+
 .loader-container {
     position: absolute;
     top: 50%;
