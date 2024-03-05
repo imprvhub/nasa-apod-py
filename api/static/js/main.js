@@ -115,11 +115,6 @@ function updateImage() {
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
 
-                newImageElement.onload = function() {
-                    newImageElement.classList.remove('blur');
-                };
-
-                newImageElement.classList.add('blur');
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(newImageElement, imageElement);
                 }
