@@ -76,7 +76,7 @@ function updateImage() {
                 // Reemplazar el elemento existente con el nuevo iframe si es necesario
                 if (imageElement && imageElement.tagName === "IFRAME") {
                     if (imageElement.src !== iframe.src) {
-                        imageElement.src = iframe.src;
+                        imageElement.parentNode.replaceChild(iframe, imageElement);
                     }
                 } else {
                     if (imageElement && imageElement.parentNode) {
@@ -103,15 +103,14 @@ function updateImage() {
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
 
-                // Reemplazar el elemento existente con la nueva imagen si es necesario
-                if (imageElement && imageElement.tagName === "IMG") {
-                    if (imageElement.src !== newImageElement.src) {
-                        imageElement.src = newImageElement.src;
-                    }
-                } else {
-                    if (imageElement && imageElement.parentNode) {
-                        imageElement.parentNode.replaceChild(newImageElement, imageElement);
-                    }
+                // Eliminar el iframe existente si es necesario
+                if (imageElement && imageElement.tagName === "IFRAME") {
+                    imageElement.parentNode.removeChild(imageElement);
+                }
+
+                // Reemplazar el elemento existente con la nueva imagen
+                if (imageElement && imageElement.parentNode) {
+                    imageElement.parentNode.replaceChild(newImageElement, imageElement);
                 }
 
                 // Actualizar el título y la explicación

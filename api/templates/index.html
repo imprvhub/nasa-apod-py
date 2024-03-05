@@ -78,7 +78,7 @@
             </div> 
             {% for image in images %}
                 {% if image.url.startswith('https://www.youtube.com/') %}
-                    <iframe width="560" height="315" src="{{ image.url }}" frameborder="0" allowfullscreen></iframe>
+                    <iframe id="apodImage" width="560" height="315" src="{{ image.url }}" frameborder="0" allowfullscreen></iframe>
                 {% else %}
                     <img id="apodImage" src="{{ image.url }}" alt="{{ image.title }}" onclick="expandImage()">
                 {% endif %}
@@ -86,6 +86,7 @@
                 <h3 id="title" class="apodTitle">'{{ image.title }}'</h3>
                 <div id="explanation" class="explanation"><b>Description:</b> {{ image.explanation }}</div>                  
             {% endfor %}
+
         </div>
         <div id="iconContainer"></div>
         <div id="expandIconContainer"> 
