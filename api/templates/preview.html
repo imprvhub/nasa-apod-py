@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/sharehandler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
@@ -24,111 +25,86 @@
             <img class="logo-style" style="top:20px;" src="{{ url_for('static', filename='images/logos/logo512.webp') }}" alt="Logo" width="50" height="50"/>
         </a>
         <a href="/">
-        <h1>Nasa Apod Card</h1>
+            <h1>Nasa Apod Card</h1>
         </a>
     </div>
     <br>
     <div class="card">
-        <h4 class="header-paragraph">This APOD card was generated dynamically from NASA public API and i wanted to share it with you!</h4>
+        <h4 class="header-paragraph">This APOD card was generated dynamically from NASA public API and I wanted to share it with you!</h4>
         <br>
-        </div>
-        <div id="imageContainer">
-            <div class="card">
-                <h2 id="title" class="apodTitle">'{{ title }}'</h2>
-                <img id="apodImage" src="{{ image_url }}" alt="{{ title }}" onclick="expandImage()">
-                <div class="paragraph">Press The Apod To Expand</div>
-                <br>
-                <div id="explanation" class="explanation">{{ description }}</div>
-                <div class="share-container">
-                    <br>
-                    <h2 id="title" class="apodTitle">Share On:</h2>
-                    <div class="menu">
-                        <div class="toggle">
-                            <ion-icon name="share-social"></ion-icon>
-                        </div>
-                        <li id="whatsapp" style="--i:0;--clr:#25d366">
-                            <a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a>
-                        </li>
-                        <li id="facebook" style="--i:5;--clr:#1877f2">
-                            <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                        </li>
-                        <li id="twitter" style="--i:6;--clr:#1da1f2">
-                            <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                        </li>
-                        <li id="reddit" style="--i:7;--clr:#ea4c89">
-                            <a href="#"><ion-icon name="logo-reddit"></ion-icon></a>
-                        </li>
-                        <li id="mail" style="--i:4;--clr:#ff0000">
-                            <a href="#"><ion-icon name="mail"></ion-icon></a>
-                        </li>
-                    </div>  
-                </div>       
-            </div>      
-        </div>   
-    </div>     
-        <br>
-        <div class="footer-card">
-                <div id="userTerms">
-                    <a href="#" onclick="closeTab()" class="paragraph" rel="noopener noreferrer" style="text-decoration: underline; color: rgb(255, 255, 255);">
-                        Close
-                    </a>
-                </div>
-                <br>
-                <div class="paragraph">
-                    © 2024 Iván Luna. Software Developer.
-                </div>
-                <br>
-                <div id="socialsContainer" class="socials-container">
-                    <a class=ivanlunadev-link href="https://ivanluna.dev" target="_blank" rel="noopener noreferrer">
-                        IVANLUNA.DEV
-                    </a>
-                    <label>-</label>
-                    <a class=github-link href="https://github.com/imprvhub" target="_blank" rel="noopener noreferrer">
-                        GITHUB
-                    </a>
-                    <label>-</label>
-                    <a class=linkedin-link href="https://linkedin.com/in/ivanluna-dev" target="_blank" rel="noopener noreferrer">
-                        LINKEDIN
-                    </a>
-                </div>
+        <input class="hidden" type="date" id="datePicker">
+    </div>
+    <div id="imageContainer">
+        <div class="card">
+            <div id="apodImageContainer">
+                {% if image_url %}
+                    {% if 'youtube.com' in image_url %}
+                        <iframe id="apodImage" width="560" height="400" src="{{ image_url }}" allowfullscreen></iframe>
+                    {% else %}
+                        <img id="apodImage" src="{{ image_url }}" alt="{{ title }}" onclick="expandImage()">
+                    {% endif %}
+                {% endif %}
             </div>
+            <br>
+            <h2 id="title" class="apodTitle">{{ title }}</h2>
+            <div id="explanation" class="explanation">{{ description }}</div>
+            <div class="share-container">
+                <br>
+                <h2 class="apodTitle">Share On:</h2>
+                <div class="menu">
+                    <div class="toggle">
+                        <ion-icon name="share-social"></ion-icon>
+                    </div>
+                    <li id="whatsapp" style="--i:0;--clr:#25d366">
+                        <a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a>
+                    </li>
+                    <li id="facebook" style="--i:5;--clr:#1877f2">
+                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                    </li>
+                    <li id="twitter" style="--i:6;--clr:#1da1f2">
+                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                    </li>
+                    <li id="reddit" style="--i:7;--clr:#ea4c89">
+                        <a href="#"><ion-icon name="logo-reddit"></ion-icon></a>
+                    </li>
+                    <li id="mail" style="--i:4;--clr:#ff0000">
+                        <a href="#"><ion-icon name="mail"></ion-icon></a>
+                    </li>
+                </div>  
+            </div>       
+        </div>      
+    </div>   
+    <br>
+    <div class="footer-card">
+        <div id="userTerms">
+            <a href="#" onclick="closeTab()" class="paragraph" rel="noopener noreferrer" style="text-decoration: underline; color: rgb(255, 255, 255);">
+                Close
+            </a>
         </div>
+        <br>
+        <div class="paragraph">
+            © 2024 Iván Luna. Software Developer.
         </div>
-        <div id="expandedImageContainer" style="display: none;">
-            <img id="expandedImage" src="" alt="">
-            <div id="closeIcon" onclick="closeImage()">✕</div>
-            <div id="expandedExplanation" class="explanation"></div>
+        <br>
+        <div id="socialsContainer" class="socials-container">
+            <a class="ivanlunadev-link" href="https://ivanluna.dev" target="_blank" rel="noopener noreferrer">IVANLUNA.DEV</a>
+            <label>-</label>
+            <a class="github-link" href="https://github.com/imprvhub" target="_blank" rel="noopener noreferrer">GITHUB</a>
+            <label>-</label>
+            <a class="linkedin-link" href="https://linkedin.com/in/ivanluna-dev" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
         </div>
     </div>
+    <div id="expandedImageContainer" style="display: none;">
+        <img id="expandedImage" src="" alt="">
+        <div id="closeIcon" onclick="closeImage()">✕</div>
+        <div id="expandedExplanation" class="explanation"></div>
+    </div>
 <script>
-        const menu=document.querySelector(".menu");
-    const toggle=document.querySelector(".toggle");
-    toggle.addEventListener("click",()=>{
-    menu.classList.toggle("active");
-    })
-</script>
-<script>
-    const params = new URLSearchParams(window.location.search);
-const imageUrl = params.get('image_url');
-const title = params.get('title');
-const description = params.get('description');
-
-
-const imageElement = document.getElementById('apodImage');
-if (imageElement) {
-    imageElement.setAttribute('src', imageUrl);
-}
-
-const titleElement = document.querySelector('h2');
-if (titleElement) {
-    titleElement.textContent = title;
-}
-
-const descriptionElement = document.querySelector('p');
-if (descriptionElement) {
-    descriptionElement.textContent = description;
-}
-
+        const menu = document.querySelector(".menu");
+        const toggle = document.querySelector(".toggle");
+        toggle.addEventListener("click", () => {
+            menu.classList.toggle("active");
+        });
 </script>
 </body>
 </html>
