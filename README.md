@@ -18,7 +18,7 @@ Visit the live app: [apod-nasa-viewer.vercel.app](https://apod-nasa-viewer.verce
 - Includes a 'Shuffle' option that randomize picks for users who are uncertain which date to explore.
 - Showcases a curated selection of the finest APOD images from 1995 (the inception year of APOD) to the present via the 'Featured NASA APOD per year' Recommendations section.
 - Generates shareable APOD cards comprising the retrieved image, title, and description.
-- **YouTube Integration(New Feature):** Users can now view APOD YouTube videos directly within the application interface. Users can also share these YouTube videos as APOD cards, expanding the application's sharing functionality. With this enhancement, users can easily spread the word about their favorite astronomical discoveries.
+- **YouTube Integration (New Feature):** Users can now watch APOD videos directly within the application interface. They can also share these YouTube videos as APOD cards, expanding the application's sharing functionality. With this enhancement, users can easily spread the word about their favorite astronomical discoveries.
 
 ## Installation and Usage
 
