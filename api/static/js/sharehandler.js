@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.open(emailUrl);
         }
         
-
         facebookIcon.addEventListener('click', shareOnFacebook);
         whatsappIcon.addEventListener('click', shareOnWhatsApp);
         twitterIcon.addEventListener('click', shareOnTwitter);
