@@ -64,22 +64,20 @@ function updateImage() {
             return response.json();
         })
         .then(data => {
-            // Verificar si la URL es de YouTube
             if (data.url.includes("youtube.com")) {
                 var videoId = data.url.split('/').pop();
                 var iframe = document.createElement("iframe");
                 iframe.id = "apodImage";
-                iframe.width = "315";  // Corregido: Height asignado al width
-                iframe.height = "560"; // Corregido: Width asignado al height
+                iframe.width = "560"; 
+                iframe.height = "400";
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
                 iframe.allowFullscreen = true;
-
-                // Reemplazar el elemento existente con el nuevo iframe si es necesario
+                iframe.style.width = "560px";
+                iframe.style.height = "315px";
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(iframe, imageElement);
                 }
 
-                // Mostrar el título y la explicación del iframe
                 if (titleElement && data.title) {
                     titleElement.textContent = data.title;
                     titleElement.style.display = "block";
@@ -92,18 +90,15 @@ function updateImage() {
                     expandIcon.style.display = "inline";
                 }
             } else {
-                // Crear un nuevo elemento de imagen
                 var newImageElement = document.createElement("img");
                 newImageElement.id = "apodImage";
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
 
-                // Reemplazar el elemento existente con la nueva imagen si es necesario
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(newImageElement, imageElement);
                 }
 
-                // Mostrar el título y la explicación de la imagen
                 if (titleElement && data.title) {
                     titleElement.textContent = data.title;
                     titleElement.style.display = "block";
@@ -140,7 +135,6 @@ function updateImage() {
             }
         });
 }
-
 
 
 function changeDate(offset) {
