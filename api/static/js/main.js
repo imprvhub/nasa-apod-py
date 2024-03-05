@@ -47,6 +47,20 @@ function initScript() {
     }
 }
 
+function showLoader() {
+    loaderContainer.style.display = 'block';
+    document.getElementById('spacer').style.display = 'block';
+    document.getElementById('loader').style.display = 'block';
+    
+}
+
+function hideLoader() {
+    loaderContainer.style.display = 'none';
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('spacer').style.display = 'none';
+}
+
+
 function updateImage() {
     var selectedDate = document.getElementById("datePicker").value;
     var imageElement = document.getElementById("apodImage");
@@ -54,6 +68,12 @@ function updateImage() {
     var expandIcon = document.getElementById("expandIcon");
     var explanation = document.getElementById("explanation");
     var expandedExplanation = document.getElementById("expandedExplanation");
+
+    imageElement.style.display = 'none';
+    titleElement.style.display = 'none';
+    explanation.style.display = 'none';
+
+    showLoader();
 
     fetch(`/update_image?date=${selectedDate}`)
         .then(response => {
@@ -73,6 +93,7 @@ function updateImage() {
                 iframe.allowFullscreen = true;
                 iframe.style.width = "560px";
                 iframe.style.height = "315px";
+
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(iframe, imageElement);
                 }
@@ -94,6 +115,7 @@ function updateImage() {
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
 
+
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(newImageElement, imageElement);
                 }
@@ -113,6 +135,10 @@ function updateImage() {
                     expandIcon.style.display = "block";
                 }
             }
+            hideLoader();
+            imageElement.style.display = 'block';
+            titleElement.style.display = 'block';
+            explanation.style.display = 'block';
         })
         .catch(error => {
             console.error("Error al procesar la solicitud:", error);
@@ -132,6 +158,10 @@ function updateImage() {
             if (expandedExplanation) {
                 expandedExplanation.innerText = "";
             }
+            hideLoader();
+            imageElement.style.display = 'block';
+            titleElement.style.display = 'block';
+            explanation.style.display = 'block';
         });
 }
 
