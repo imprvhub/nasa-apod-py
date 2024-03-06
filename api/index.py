@@ -167,9 +167,10 @@ def apod_images():
         now_eastern = datetime.now(eastern_timezone)
         if now_eastern.hour < 12:
             now_eastern -= timedelta(days=1)
+        eastern_today = now_eastern.strftime('%Y-%m-%d')
         today = datetime.now(eastern_timezone).strftime('%Y-%m-%d')
         picture = apod(today)
-        return render_template('index.html', images=[picture])
+        return render_template('index.html', images=[picture], eastern_today=eastern_today)
 
 @app.route('/update_image')
 def update_image():

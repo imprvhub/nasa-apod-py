@@ -64,9 +64,9 @@
             <label class="paragraph" for="datePicker">Select a Date:</label>            
             <div id="datePickerContainer">
                 <div id="previousDate" onclick="changeDate(-1)">&lt;</div> 
-                <input type="date" id="datePicker" onchange="updateImage()" placeholder="YYYY-MM-DD" min="1995-06-16" max="">
+                <input type="date" id="datePicker" onchange="updateImage()" min="1995-06-16" max="" placeholder="{{ eastern_today }}">
                 <div id="nextDate" onclick="changeDate(1)">&gt;</div>
-            </div>  
+            </div>             
             <div id="navigationArrows">
                 <div id="expandIconContainer"> 
                     <div id="diceIcon" onclick="diceImage()">
