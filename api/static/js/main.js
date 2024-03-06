@@ -22,6 +22,7 @@ function initScript() {
     const imageUrl = params.get('image_url');
     const title = params.get('title');
     const description = params.get('description');
+    const date = params.get('date');
 
     const isIframe = document.getElementById('apodImage').tagName === 'IFRAME';
 
@@ -45,6 +46,12 @@ function initScript() {
             descriptionElement.textContent = description;
         }
     }
+
+    if (!date) {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById("datePicker").value = today;
+    }
+
 }
 
 function showLoader() {
@@ -166,15 +173,17 @@ function updateImage() {
             });
     }
 
-function changeDate(offset) {
-    var datePicker = document.getElementById("datePicker");
-    var selectedDate = new Date(datePicker.value);
-    selectedDate.setDate(selectedDate.getDate() + offset);
-    datePicker.value = selectedDate.toISOString().split('T')[0];
-    updateImage();
-
-    document.getElementById("recommendedApod").value = "";
-}
+    function changeDate(offset) {
+        var datePicker = document.getElementById("datePicker");
+        var selectedDate = new Date(datePicker.value);
+        selectedDate.setDate(selectedDate.getDate() + offset);
+        var formattedDate = selectedDate.toISOString().split('T')[0];
+        datePicker.value = formattedDate;
+        updateImage();  
+        document.getElementById("recommendedApod").value = "";
+    }
+    
+    
 
 function selectRecommendedDate() {
     var selectedDate = document.getElementById("recommendedApod").value;
