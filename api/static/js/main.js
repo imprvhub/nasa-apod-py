@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         minDate: "1995-06-16",
         maxDate: today,
         onChange: function(selectedDates, dateStr, instance) {
+            document.getElementById("recommendedApod").value = "";
             updateImage();
         }
     });
@@ -204,7 +205,6 @@ function diceImage() {
     var randomDate = getRandomDate();
     document.getElementById("datePicker").value = randomDate;
     updateImage();
-
     document.getElementById("recommendedApod").value = "";
 }
 
