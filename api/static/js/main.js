@@ -84,6 +84,7 @@ function updateImage() {
         })
         .then(data => {
             if (data.url.includes("youtube.com")) {
+                hideLoader();
                 var videoId = data.url.split('/').pop();
                 var iframe = document.createElement("iframe");
                 iframe.id = "apodImage";
@@ -114,56 +115,56 @@ function updateImage() {
                 newImageElement.id = "apodImage";
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
+                newImageElement.onload = function() {
+                    if (imageElement && imageElement.parentNode) {
+                        imageElement.parentNode.replaceChild(newImageElement, imageElement);
+                    }
 
-                if (imageElement && imageElement.parentNode) {
-                    imageElement.parentNode.replaceChild(newImageElement, imageElement);
+                    if (titleElement && data.title) {
+                        titleElement.textContent = data.title;
+                        titleElement.style.display = "block";
+                    }
+                    if (explanation && data.explanation) {
+                        explanation.textContent = data.explanation;
+                        explanation.style.display = "block";
+                    }
+                    if (expandedExplanation && data.explanation) {
+                        expandedExplanation.textContent = data.explanation;
+                    }
+                    if (expandIcon) {
+                        expandIcon.style.display = "block";
+                    }
+                    hideLoader();
+                    imageElement.style.display = 'block';
+                    titleElement.style.display = 'block';
+                    explanation.style.display = 'block';
+                };
+            }
+            })
+            .catch(error => {
+                console.error("Error al procesar la solicitud:", error);
+                if (imageElement) {
+                    imageElement.src = "static/images/image_not_found.jpeg";
+                    imageElement.alt = "Not Found";
                 }
-
-                if (titleElement && data.title) {
-                    titleElement.textContent = data.title;
-                    titleElement.style.display = "block";
-                }
-                if (explanation && data.explanation) {
-                    explanation.textContent = data.explanation;
-                    explanation.style.display = "block";
-                }
-                if (expandedExplanation && data.explanation) {
-                    expandedExplanation.textContent = data.explanation;
+                if (titleElement) {
+                    titleElement.innerText = "";
                 }
                 if (expandIcon) {
-                    expandIcon.style.display = "block";
+                    expandIcon.style.display = "none";
                 }
-            }
-            hideLoader();
-            imageElement.style.display = 'block';
-            titleElement.style.display = 'block';
-            explanation.style.display = 'block';
-        })
-        .catch(error => {
-            console.error("Error al procesar la solicitud:", error);
-            if (imageElement) {
-                imageElement.src = "static/images/image_not_found.jpeg";
-                imageElement.alt = "Not Found";
-            }
-            if (titleElement) {
-                titleElement.innerText = "";
-            }
-            if (expandIcon) {
-                expandIcon.style.display = "none";
-            }
-            if (explanation) {
-                explanation.innerText = "";
-            }
-            if (expandedExplanation) {
-                expandedExplanation.innerText = "";
-            }
-            hideLoader();
-            imageElement.style.display = 'block';
-            titleElement.style.display = 'block';
-            explanation.style.display = 'block';
-        });
-}
-
+                if (explanation) {
+                    explanation.innerText = "";
+                }
+                if (expandedExplanation) {
+                    expandedExplanation.innerText = "";
+                }
+                hideLoader();
+                imageElement.style.display = 'block';
+                titleElement.style.display = 'block';
+                explanation.style.display = 'block';
+            });
+    }
 
 function changeDate(offset) {
     var datePicker = document.getElementById("datePicker");
