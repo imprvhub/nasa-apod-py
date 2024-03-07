@@ -97,12 +97,12 @@
             <div id="expandIcon" onclick="expandImage()">
                 <img src="static/images/icons/expand-icon.webp" width="13" height="15" alt="Expand Icon">
                 <br>
-                <label class="paragraph">Expand</label>
+                <label class="paragraph-link">EXPAND</label>
             </div>
             <div id="shareIcon" onclick="shareCard()">
                 <img src="static/images/icons/card.webp" width="13" height="15" alt="Card Icon">
                 <br>
-                <label class="paragraph">Apod Card</label>
+                <label class="paragraph-link">APOD CARD</label>
             </div>
         </div>
         
@@ -114,9 +114,9 @@
     </div>
     <div class="footer-card">
         <div id="userTerms">
-            <a href="{{ url_for('user_agreements') }}" class="paragraph" rel="noopener noreferrer" style="text-decoration: underline; color: rgb(255, 255, 255);">
+            <a href="{{ url_for('user_agreements') }}" class="paragraph custom-link" rel="noopener noreferrer" style="text-decoration: none; color: rgb(255, 255, 255);" onmouseover="this.style.color='#E85D2B'" onmouseout="this.style.color='rgb(255, 255, 255)'">
                 User Agreements - Terms - Privacy Policies
-            </a>
+            </a>            
         </div>
         <br>
         <div class="paragraph">
