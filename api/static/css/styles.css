@@ -133,8 +133,8 @@ h1 {
 }
 
 .shuffle-text, .expand-text {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 11px;
+    color: rgb(255, 255, 255);
     letter-spacing: 2px;
     text-transform: uppercase;
 }
@@ -274,7 +274,7 @@ body {
 }
 
 #navigationArrows div:hover {
-    color: #ccc; 
+    color: #E85D2B;
 }
 
 #expandIconContainer {
@@ -350,7 +350,7 @@ body {
 }
 
 .shuffle-text:hover{
-    color: white;
+    color: #E85D2B;
 }
 
 .icon-dice:hover {
@@ -368,7 +368,7 @@ body {
 
 .expand-text:hover,
 .icon-expand:hover {
-    color: white;
+    color: #E85D2B;
 }
 
 .socials-container {
@@ -388,16 +388,45 @@ body {
 .ivanlunadev-link:hover,
 .github-link:hover,
 .linkedin-link:hover {
-    color: white;
+    color: #E85D2B;
 }
 
 
 .paragraph-link {
     color: white; 
-    text-decoration: underline;
+    letter-spacing: 2px;
+    font-size: 10px;
+    text-decoration: none;
 }
 
+.paragraph-link:hover {
+color: #E85D2B;
+}
 
+.custom-link:hover {
+    color: #E85D2B;
+}
+
+.button-home {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 11px;
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    background-color: #2e182e;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.button-home:hover {
+    background-color: #2e182e;
+    text-decoration: none;
+    color: #E85D2B;
+}
 
 /* MobileS (320px) */
 @media (max-width: 320px) {
