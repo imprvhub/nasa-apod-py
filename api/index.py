@@ -180,7 +180,11 @@ def update_image():
         return jsonify({'url': picture.url, 'title': picture.title, 'explanation': picture.explanation})
     except Exception as e:
         print(f"Error: {str(e)}")
-        return jsonify({'error': 'Image not found'}), 404
+        return jsonify({
+            'url': 'static/images/image_not_found.png',
+            'title': '404 - Not Found',
+            'explanation': 'APOD was not delivered for this date, or is pending, or encountering issues with the API or server. Kindly report this error or choose an alternative date. The Astronomy Picture of the Day (APOD) service commenced on June 16, 1995. The latest image was delivered at midnight today (Eastern Time). Please select a date within that timeframe.'
+        }), 404
         
 @app.route('/preview', methods=['GET', 'POST'])
 def card_preview():
