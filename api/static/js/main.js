@@ -73,12 +73,15 @@ function updateImage() {
     const imageElement = document.getElementById("apodImage");
     const titleElement = document.getElementById("title");
     const expandIcon = document.getElementById("expandIcon");
+    const shareIcon = document.getElementById("shareIcon");
     const explanation = document.getElementById("explanation");
     const expandedExplanation = document.getElementById("expandedExplanation");
 
     imageElement.style.display = 'none';
     titleElement.style.display = 'none';
     explanation.style.display = 'none';
+    expandIcon.style.display = 'none';
+    shareIcon.style.display = 'none';
 
     showLoader();
 
@@ -117,6 +120,9 @@ function updateImage() {
                 if (expandIcon) {
                     expandIcon.style.display = "inline";
                 }
+                if (shareIcon) {
+                    shareIcon.style.display = "inline";
+                }
             } else {
                 const newImageElement = document.createElement("img");
                 newImageElement.id = "apodImage";
@@ -141,6 +147,9 @@ function updateImage() {
                     if (expandIcon) {
                         expandIcon.style.display = "block";
                     }
+                    if (shareIcon) {
+                        shareIcon.style.display = "inline";
+                    }
                     hideLoader();
                     imageElement.style.display = 'block';
                     titleElement.style.display = 'block';
@@ -159,6 +168,9 @@ function updateImage() {
             }
             if (expandIcon) {
                 expandIcon.style.display = "none";
+            }
+            if (shareIcon) {
+                shareIcon.style.display = "none";
             }
             if (explanation) {
                 explanation.innerText = "APOD was not delivered for this date, or is pending, or encountering issues with the API or server. Kindly report this error or choose an alternative date.";
@@ -191,6 +203,7 @@ function changeDate(offset) {
         datePicker.value = formattedDate;
         updateImage();
         document.getElementById("recommendedApod").value = "";
+
         nextDateButton.style.opacity = 1;
         nextDateButton.style.pointerEvents = "auto";
     };
