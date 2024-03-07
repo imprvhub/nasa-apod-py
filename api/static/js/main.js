@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         initScript();
     }
 
-    var today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split('T')[0];
     document.getElementById("datePicker").setAttribute("max", today);
 
     window.flatpickr("#datePicker", {
@@ -49,33 +49,32 @@ function initScript() {
     }
 
     if (!date) {
-        var today = new Date().toISOString().split('T')[0];
+        const today = new Date().toISOString().split('T')[0];
         document.getElementById("datePicker").value = today;
     }
-
 }
 
 function showLoader() {
+    const loaderContainer = document.getElementById('loaderContainer');
     loaderContainer.style.display = 'block';
     document.getElementById('spacer').style.display = 'block';
-    document.getElementById('loader').style.display = 'block';
-    
+    document.getElementById('loader').style.display = 'block';   
 }
 
 function hideLoader() {
+    const loaderContainer = document.getElementById('loaderContainer');
     loaderContainer.style.display = 'none';
     document.getElementById('loader').style.display = 'none';
     document.getElementById('spacer').style.display = 'none';
 }
 
-
 function updateImage() {
-    var selectedDate = document.getElementById("datePicker").value;
-    var imageElement = document.getElementById("apodImage");
-    var titleElement = document.getElementById("title");
-    var expandIcon = document.getElementById("expandIcon");
-    var explanation = document.getElementById("explanation");
-    var expandedExplanation = document.getElementById("expandedExplanation");
+    const selectedDate = document.getElementById("datePicker").value;
+    const imageElement = document.getElementById("apodImage");
+    const titleElement = document.getElementById("title");
+    const expandIcon = document.getElementById("expandIcon");
+    const explanation = document.getElementById("explanation");
+    const expandedExplanation = document.getElementById("expandedExplanation");
 
     imageElement.style.display = 'none';
     titleElement.style.display = 'none';
@@ -93,8 +92,8 @@ function updateImage() {
         .then(data => {
             if (data.url.includes("youtube.com")) {
                 hideLoader();
-                var videoId = data.url.split('/').pop();
-                var iframe = document.createElement("iframe");
+                const videoId = data.url.split('/').pop();
+                const iframe = document.createElement("iframe");
                 iframe.id = "apodImage";
                 iframe.width = "560"; 
                 iframe.height = "400";
@@ -119,7 +118,7 @@ function updateImage() {
                     expandIcon.style.display = "inline";
                 }
             } else {
-                var newImageElement = document.createElement("img");
+                const newImageElement = document.createElement("img");
                 newImageElement.id = "apodImage";
                 newImageElement.src = data.url;
                 newImageElement.alt = data.title;
@@ -148,70 +147,81 @@ function updateImage() {
                     explanation.style.display = 'block';
                 };
             }
-            })
-            .catch(error => {
-                console.error("Error al procesar la solicitud:", error);
-                if (imageElement) {
-                    imageElement.src = "static/images/image_not_found.jpeg";
-                    imageElement.alt = "Not Found";
-                }
-                if (titleElement) {
-                    titleElement.innerText = "";
-                }
-                if (expandIcon) {
-                    expandIcon.style.display = "none";
-                }
-                if (explanation) {
-                    explanation.innerText = "";
-                }
-                if (expandedExplanation) {
-                    expandedExplanation.innerText = "";
-                }
-                hideLoader();
-                imageElement.style.display = 'block';
-                titleElement.style.display = 'block';
-                explanation.style.display = 'block';
-            });
-    }
+        })
+        .catch(error => {
+            console.error("Error al procesar la solicitud:", error);
+            if (imageElement) {
+                imageElement.src = "static/images/image_not_found.png";
+                imageElement.alt = "Not Found";
+            }
+            if (titleElement) {
+                titleElement.innerText = "404 - Not Found";
+            }
+            if (expandIcon) {
+                expandIcon.style.display = "none";
+            }
+            if (explanation) {
+                explanation.innerText = "APOD was not delivered for this date, or is pending, or encountering issues with the API or server. Kindly report this error or choose an alternative date.";
+            }
+            if (expandedExplanation) {
+                expandedExplanation.innerText = "";
+            }
+            hideLoader();
+            imageElement.style.display = 'block';
+            titleElement.style.display = 'block';
+            explanation.style.display = 'block';
+        });
+}
 
-    function changeDate(offset) {
-        var datePicker = document.getElementById("datePicker");
-        var selectedDate = new Date(datePicker.value);
-        selectedDate.setDate(selectedDate.getDate() + offset);
+
+function changeDate(offset) {
+    const datePicker = document.getElementById("datePicker");
+    const selectedDate = new Date(datePicker.value);
+    selectedDate.setDate(selectedDate.getDate() + offset);
+
+    const today = new Date().toISOString().split('T')[0];
+    const maxDate = new Date(datePicker.getAttribute("max"));
+    const nextDateButton = document.getElementById("nextDate");
+
+    if (selectedDate > maxDate || selectedDate < new Date("1995-06-16")) {
+        nextDateButton.style.opacity = 0.5;
+        nextDateButton.style.pointerEvents = "none"; 
+    } else {
         var formattedDate = selectedDate.toISOString().split('T')[0];
         datePicker.value = formattedDate;
-        updateImage();  
+        updateImage();
         document.getElementById("recommendedApod").value = "";
-    }
-    
-    
+        nextDateButton.style.opacity = 1;
+        nextDateButton.style.pointerEvents = "auto";
+    };
+}
 
 function selectRecommendedDate() {
-    var selectedDate = document.getElementById("recommendedApod").value;
+    const selectedDate = document.getElementById("recommendedApod").value;
     document.getElementById("datePicker").value = selectedDate;
     updateImage(); 
 }
 
 function getRandomDate() {
-    var minDate = new Date('1995-06-16');
-    var currentDate = new Date();
-    var rangeInDays = (currentDate - minDate) / (1000 * 60 * 60 * 24);
-    var randomOffset = Math.floor(Math.random() * rangeInDays);
-    var randomDate = new Date(minDate.getTime() + randomOffset * 24 * 60 * 60 * 1000);
+    const minDate = new Date('1995-06-16');
+    const currentDate = new Date();
+    const rangeInDays = (currentDate - minDate) / (1000 * 60 * 60 * 24);
+    const randomOffset = Math.floor(Math.random() * rangeInDays);
+    const randomDate = new Date(minDate.getTime() + randomOffset * 24 * 60 * 60 * 1000);
     return randomDate.toISOString().split('T')[0];
 }
 
 function diceImage() {
-    var randomDate = getRandomDate();
+    const randomDate = getRandomDate();
     document.getElementById("datePicker").value = randomDate;
     updateImage();
     document.getElementById("recommendedApod").value = "";
 }
 
 function expandImage() {
-    var expandedContainer = document.getElementById("expandedImageContainer");
-    var imageElement = document.getElementById("expandedImage");
-    var expandedExplanation = document.getElementById("expandedExplanation");
+    const expandedContainer = document.getElementById("expandedImageContainer");
+    const imageElement = document.getElementById("expandedImage");
+    const expandedExplanation = document.getElementById("expandedExplanation");
     imageElement.src = document.getElementById("apodImage").src;
     imageElement.alt = document.getElementById("apodImage").alt;
     expandedExplanation.style.display = "block";
@@ -220,8 +230,8 @@ function expandImage() {
 }
 
 function closeImage() {
-    var expandedContainer = document.getElementById("expandedImageContainer");
-    var expandedExplanation = document.getElementById("expandedExplanation");
+    const expandedContainer = document.getElementById("expandedImageContainer");
+    const expandedExplanation = document.getElementById("expandedExplanation");
     
     expandedContainer.style.display = "none";
 }
@@ -231,15 +241,12 @@ function closeTab() {
 }
 
 function shareCard() {
-    var imageUrl = document.getElementById("apodImage").src;
-    var imageTitle = document.getElementById("title").innerText;
-    var imageDescription = document.getElementById("explanation").innerText;
-
-
-    var encodedImageUrl = encodeURIComponent(imageUrl);
-    var encodedImageTitle = encodeURIComponent(imageTitle);
-    var encodedImageDescription = encodeURIComponent(imageDescription);
-
-    var previewUrl = `/preview?image_url=${encodedImageUrl}&title=${encodedImageTitle}&description=${encodedImageDescription}`;
-    var cardWindow = window.open(previewUrl, "_blank");
+    const imageUrl = document.getElementById("apodImage").src;
+    const imageTitle = document.getElementById("title").innerText;
+    const imageDescription = document.getElementById("explanation").innerText;
+    const encodedImageUrl = encodeURIComponent(imageUrl);
+    const encodedImageTitle = encodeURIComponent(imageTitle);
+    const encodedImageDescription = encodeURIComponent(imageDescription);
+    const previewUrl = `/preview?image_url=${encodedImageUrl}&title=${encodedImageTitle}&description=${encodedImageDescription}`;
+    const cardWindow = window.open(previewUrl, "_blank");
 }
