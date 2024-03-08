@@ -253,6 +253,36 @@ function closeTab() {
     window.close();
 }
 
+function handleMouseOverExpand() {
+    document.getElementById("expandLabel").style.color = "#E85D2B";
+    document.querySelector("#expandIcon img").style.filter = "invert(35%) sepia(94%) saturate(3580%) hue-rotate(341deg) brightness(100%) contrast(100%)";
+}
+
+function handleMouseOutExpand() {
+    document.getElementById("expandLabel").style.color = "white";
+    document.querySelector("#expandIcon img").style.filter = "invert(0%)";
+}
+
+function handleMouseOver() {
+    document.getElementById("labelElement").style.color = "#E85D2B";
+    document.querySelector("#shareIcon img").style.filter = "invert(35%) sepia(94%) saturate(3580%) hue-rotate(341deg) brightness(100%) contrast(100%)";
+}
+
+function handleMouseOut() {
+    document.getElementById("labelElement").style.color = "white";
+    document.querySelector("#shareIcon img").style.filter = "invert(0%)";
+}
+
+function handleMouseOverDice() {
+    document.getElementById("diceLabel").style.color = "#E85D2B";
+    document.querySelector("#diceIcon img").style.filter = "invert(35%) sepia(94%) saturate(3580%) hue-rotate(341deg) brightness(100%) contrast(100%)";
+}
+
+function handleMouseOutDice() {
+    document.getElementById("diceLabel").style.color = "white";
+    document.querySelector("#diceIcon img").style.filter = "invert(0%)";
+}
+
 function shareCard() {
     const imageUrl = document.getElementById("apodImage").src;
     const imageTitle = document.getElementById("title").innerText;
