@@ -69,10 +69,10 @@
             </div>             
             <div id="navigationArrows">
                 <div id="expandIconContainer"> 
-                    <div id="diceIcon" onclick="diceImage()">
-                        <label class="shuffle-text">Or Shuffle </label>
+                    <div id="diceIcon" onmouseover="handleMouseOverDice()" onmouseout="handleMouseOutDice()" onclick="diceImage()">
+                        <label id="diceLabel" class="shuffle-text">Or Shuffle</label>
                         <br>
-                        <img src="static/images/icons/dice-icon.webp" onclick="diceImage()" width="13" height="15" class="icon-dice" alt="Dice Icon">
+                        <img src="static/images/icons/dice-icon.webp" width="13" height="15" class="icon-dice" alt="Dice Icon">
                     </div>
                 </div>
             </div> 
@@ -94,16 +94,16 @@
         </div>
         <div id="iconContainer"></div>
         <div id="expandIconContainer"> 
-            <div id="expandIcon" onclick="expandImage()">
+            <div id="expandIcon" onmouseover="handleMouseOverExpand()" onmouseout="handleMouseOutExpand()" onclick="expandImage()">
                 <img src="static/images/icons/expand-icon.webp" width="13" height="15" alt="Expand Icon">
                 <br>
-                <label class="paragraph-link">EXPAND</label>
-            </div>
-            <div id="shareIcon" onclick="shareCard()">
+                <label id="expandLabel" class="paragraph-link">EXPAND</label>
+            </div>            
+            <div id="shareIcon" onmouseover="handleMouseOver()" onmouseout="handleMouseOut()" onclick="shareCard()">
                 <img src="static/images/icons/card.webp" width="13" height="15" alt="Card Icon">
                 <br>
-                <label class="paragraph-link">APOD CARD</label>
-            </div>
+                <label id="labelElement" class="paragraph">APOD CARD</label>
+            </div>            
         </div>
         
         <div id="expandedImageContainer" style="display: none;">
