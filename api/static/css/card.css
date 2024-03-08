@@ -376,6 +376,30 @@ body {
     z-index:5;
 }
 
+ion-icon[aria-label="logo whatsapp"]:hover {
+    color: #31e82b;
+}
+
+ion-icon[aria-label="logo reddit"]:hover {
+    color: #E85D2B;
+}
+
+ion-icon[aria-label="logo twitter"]:hover {
+    color: #2b8de8;
+}
+
+ion-icon[aria-label="logo facebook"]:hover {
+    color: #293aff;
+}
+
+ion-icon[aria-label="mail"]:hover {
+    color: #c1522a;
+}
+
+.menu .toggle:hover{
+    color: #E85D2B;
+}
+
 .menu.active .toggle{
     transform:rotate(360deg);
     box-shadow: 0 6px 8px rgba(255,255,255,0.15),
