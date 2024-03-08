@@ -48,11 +48,18 @@
 .loader:after {
     animation-delay: -1s;
 }
+
 @keyframes l2 {
 100% {box-shadow: 0 0 0 40px #0000}
 }
 
+#recommendedApod[disabled] {
+    color: #ffffff;
+}
 
+#recommendedApod:hover {
+    color: #E85D2B;
+}
 
 #datePicker {
     background-color: transparent;
