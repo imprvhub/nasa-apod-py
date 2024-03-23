@@ -10,7 +10,7 @@ from pytz import timezone
 import requests
 from PIL import Image
 from dotenv import load_dotenv
-from flask import Flask, jsonify, redirect, render_template, request
+from flask import Flask, jsonify, redirect, render_template, request, abort
 from hashids import Hashids
 
 load_dotenv()
@@ -177,10 +177,23 @@ def apod_images():
         now_eastern = datetime.now(eastern_timezone)
         if now_eastern.hour < 12:
             now_eastern -= timedelta(days=1)
-        eastern_today = now_eastern.strftime('%Y-%m-%d')
         today = datetime.now(eastern_timezone).strftime('%Y-%m-%d')
-        picture = apod("2024-03-22")
-        return render_template('index.html', images=[picture], eastern_today=eastern_today)
+        
+        try:
+            eastern_timezone = timezone('US/Eastern')
+            now_eastern = datetime.now(eastern_timezone)
+            today = now_eastern.strftime('%Y-%m-%d')
+    
+            if now_eastern.hour < 12:
+                yesterday = (now_eastern - timedelta(days=1)).strftime('%Y-%m-%d')
+                picture = apod(yesterday)
+                return render_template('index.html', images=[picture], yesterday=yesterday)
+            else:
+                picture = apod(today)
+                return render_template('index.html', images=[picture], eastern_today=today)
+        except Exception as e:
+            app.logger.error(f"Error retrieving APOD: {str(e)}")
+            abort(404)
 
 @app.route('/update_image')
 def update_image():
