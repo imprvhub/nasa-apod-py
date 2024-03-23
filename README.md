@@ -20,6 +20,10 @@ Visit the live app: [apod-nasa-viewer.vercel.app](https://apod-nasa-viewer.verce
 - Generates shareable APOD cards comprising the retrieved image, title, and description.
 - **YouTube Integration (New Feature):** Users can now watch APOD videos directly within the application interface. They can also share these YouTube videos as APOD cards, expanding the application's sharing functionality. With this enhancement, users can easily spread the word about their favorite astronomical discoveries.
 
+## To-Do:
+- **Address NASA delays or APOD update failures by implementing fetching from the API on the previous day (DONE); resolve date-picker script issue within this context (PENDING).**
+
+
 ## Installation and Usage
 
 To run this project locally, follow these steps:
