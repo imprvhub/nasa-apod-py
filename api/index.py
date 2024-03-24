@@ -171,29 +171,26 @@ class Apod(NasaApiObject):
     
 @app.route('/')
 def apod_images():
-    params = request.args
-    if not params:
-        eastern_timezone = timezone('US/Eastern')
-        now_eastern = datetime.now(eastern_timezone)
-        if now_eastern.hour < 12:
-            now_eastern -= timedelta(days=1)
-        today = datetime.now(eastern_timezone).strftime('%Y-%m-%d')
-        
-        try:
-            eastern_timezone = timezone('US/Eastern')
-            now_eastern = datetime.now(eastern_timezone)
-            today = now_eastern.strftime('%Y-%m-%d')
+    eastern_timezone = timezone('US/Eastern')
+    now_eastern = datetime.now(eastern_timezone)
     
-            if now_eastern.hour < 12:
-                yesterday = (now_eastern - timedelta(days=1)).strftime('%Y-%m-%d')
-                picture = apod(yesterday)
-                return render_template('index.html', images=[picture], yesterday=yesterday)
-            else:
-                picture = apod(today)
-                return render_template('index.html', images=[picture], eastern_today=today)
-        except Exception as e:
-            app.logger.error(f"Error retrieving APOD: {str(e)}")
-            abort(404)
+    today = now_eastern.strftime('%Y-%m-%d')
+    yesterday = (now_eastern - timedelta(days=1)).strftime('%Y-%m-%d')
+    
+    try:
+        picture_today = apod(today)
+        if picture_today is not None: 
+            return render_template('index.html', images=[picture_today], eastern_today=today)
+    except Exception as e:
+        app.logger.error(f"Error retrieving APOD for today: {str(e)}")
+    
+    try:
+        picture_yesterday = apod(yesterday)
+        if picture_yesterday is not None: 
+            return render_template('index.html', images=[picture_yesterday], eastern_today=yesterday)
+    except Exception as e:
+        app.logger.error(f"Error retrieving APOD for yesterday: {str(e)}")
+    return render_template('index.html', images="{{ url_for('static', filename='images/image_not_found.png') }}")
 
 @app.route('/update_image')
 def update_image():
