@@ -178,7 +178,7 @@ def apod_images():
     yesterday = (now_eastern - timedelta(days=1)).strftime('%Y-%m-%d')
     
     try:
-        picture_today = apod(yesterday)
+        picture_today = apod(today)
         if picture_today is not None: 
             return render_template('index.html', images=[picture_today], eastern_today=today)
     except Exception as e:
@@ -248,4 +248,3 @@ def user_agreements():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
