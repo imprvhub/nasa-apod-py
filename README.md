@@ -1,17 +1,17 @@
-# Welcome to the [Nasa Apod Viewer](https://apod-nasa-viewer.vercel.app/) Project.
+## Welcome to the [Nasa Apod Viewer](https://apod-nasa-viewer.vercel.app/) Project.
 
 This project is a Python web application built with Flask. It fetches NASA's Astronomy Picture of the Day (APOD) from the NASA API and provides functionalities to view and share the images as APOD cards.
 
-## Demo
+### Demo
 
 Visit the live app: [apod-nasa-viewer.vercel.app](https://apod-nasa-viewer.vercel.app)
 
-## Preview
+### Preview
 
 ![Preview](./api/static/images/preview.png "Preview")
 
 
-## Key Features
+### Key Features
 
 - Fetches the Astronomy Picture of the Day from the NASA API.
 - Enables users to explore APOD images via a calendar navigation or by searching for specific dates.
@@ -19,7 +19,7 @@ Visit the live app: [apod-nasa-viewer.vercel.app](https://apod-nasa-viewer.verce
 - Showcases a curated selection of the finest APOD images from 1995 (the inception year of APOD) to the present via the 'Featured NASA APOD per year' Recommendations section.
 - Generates shareable APOD cards comprising the retrieved image, title, and description.
 
-## Installation and Usage
+### Installation and Usage
 
 To run this project locally, follow these steps:
 
@@ -55,7 +55,11 @@ To run this project locally, follow these steps:
    http://localhost:5000/
    ```
 
-## Conclusion:
+
+### To-Do:
+- **Address NASA delays or APOD update failures by implementing fetching from the API on the previous day; resolve date-picker script issue within this context.**
+
+### Conclusion:
 
 #### Achievements
 
@@ -65,12 +69,12 @@ To run this project locally, follow these steps:
 
 - **Enhanced Frontend-Backend Interaction:** I gained insights into achieving improved interaction between frontend scripts and Python backend processes. Previously, my approach was limited to transmitting specific data and processing it. However, this project necessitated establishing a continuous exchange of data between the frontend and backend due to the numerous scripts and interactions within the web application. It was a valuable learning experience.   
 
-## Feedback & Support
+### Feedback & Support
 Your input matters, and I'm ready to help address any inquiries or feedback you may have. Your contributions are essential for refining the project and enhancing the overall user experience. Don't hesitate to get in touch with me:
 
 Feel free to share your insights, recommendations, or suggestions for continuous improvement. If you encounter any challenges or require assistance, please [create a new GitHub issue](https://github.com/imprvhub/nasa-apod-viewer/issues/new). Be sure to provide a detailed description of your issue to facilitate prompt and precise support.
 
-## License
+### License
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/imprvhub/nasa-apod-viewer/blob/main/LICENSE.md) file for details.
 
