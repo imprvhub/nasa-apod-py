@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const videoId = extractYouTubeVideoId(imageUrl);
             const iframeSrc = `https://www.youtube.com/embed/${videoId}`;
             const iframe = document.createElement('iframe');
-            iframe.width = "560";
+            iframe.width = "100%";
             iframe.height = "400";
             iframe.src = iframeSrc;
             iframe.setAttribute('allowfullscreen', '');
