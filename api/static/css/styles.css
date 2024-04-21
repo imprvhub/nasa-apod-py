@@ -3,6 +3,36 @@
     src: url('/static/fonts/QueensidesMedium-x30zV.ttf') format('truetype');
 }
 
+body {
+    background-color: #000000;
+    background-size: cover;
+    background-position: center;
+}
+
+@media screen and (min-width: 1921px) {
+    body {
+        background-image: url("/static/images/background-image/1920-1080.png");
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    body {
+        background-image: url("/static/images/background-image/1024-768.png");
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        background-image: url("/static/images/background-image/750-1334.png");
+    }
+}
+
+@media screen and (min-width: 3841px) {
+    body {
+        background-image: url("/static/images/background-image/3840-2160.png");
+    }
+}
+
 .loader-container {
     position: absolute;
     top: 50%;
@@ -160,11 +190,6 @@ h1 {
     letter-spacing: 2px;
 }
 
-body {
-
-    background-color: #000000;
-    background-image: url("/static/images/background-image.webp");
-    }
 
 
     .card {
