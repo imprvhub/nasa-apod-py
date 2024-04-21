@@ -524,7 +524,22 @@ ion-icon[aria-label="mail"]:hover {
 @media (max-width: 320px) {
     #explanation {
         max-width: 280px;
+        font-size: 14px;
     }
+    
+
+    .paragraph { 
+        font-size: 13px;
+    }
+
+    .paragraph-link { 
+        font-size: 13px;
+    }
+
+    .shuffle-text { 
+        font-size: 13px;
+    }
+    
     h1 {
         font-size: 20px;
     }
@@ -547,7 +562,21 @@ ion-icon[aria-label="mail"]:hover {
 @media (min-width: 321px) and (max-width: 375px) {
     #explanation {
         max-width: 330px; 
+        font-size: 14px;
     }
+
+    .paragraph { 
+        font-size: 13px;
+    }
+
+    .paragraph-link { 
+        font-size: 13px;
+    }
+
+    .shuffle-text { 
+        font-size: 13px;
+    }
+
     h1 {
         font-size: 22px;
     }
@@ -570,6 +599,19 @@ ion-icon[aria-label="mail"]:hover {
 @media (min-width: 376px) and (max-width: 425px) {
     #explanation {
         max-width: 380px; 
+        font-size: 14px;
+    }
+
+    .shuffle-text { 
+        font-size: 13px;
+    }
+
+    .paragraph { 
+        font-size: 13px;
+    }
+
+    .paragraph-link { 
+        font-size: 13px;
     }
     h1 {
         font-size: 24px;
@@ -594,7 +636,21 @@ ion-icon[aria-label="mail"]:hover {
 @media (min-width: 426px) and (max-width: 768px) {
     #explanation {
         max-width: 600px; 
+        font-size: 13px;
     }
+
+    .shuffle-text { 
+        font-size: 13px;
+    }
+
+    .paragraph { 
+        font-size: 13px;
+    }
+
+    .paragraph-link { 
+        font-size: 13px;
+    }
+
     h1 {
         font-size: 28px;
     }
