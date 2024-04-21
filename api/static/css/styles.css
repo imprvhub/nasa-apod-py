@@ -393,6 +393,16 @@ h1 {
     
 }
 
+#expandIcon {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    #expandIcon {
+        display: none !important;
+    }
+}
+
 
 #closeIcon {
     position: absolute;
