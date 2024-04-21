@@ -8,7 +8,7 @@ Visit the live app: [apod-nasa-viewer.vercel.app](https://apod-nasa-viewer.verce
 
 ### Preview
 
-![Preview](./api/static/images/preview.png "Preview")
+![Preview](./api/static/images/previewreadme.png "Preview")
 
 
 ### Key Features
