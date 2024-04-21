@@ -114,7 +114,6 @@ h1 {
         backdrop-filter: blur(25px) saturate(200%);
         -webkit-backdrop-filter: blur(25px) saturate(200%);
         background-color: rgba(24, 24, 25, 0.6);
-        border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.125);
         margin-left: auto;
         margin-right: auto;
@@ -127,7 +126,6 @@ h1 {
         backdrop-filter: blur(25px) saturate(200%);
         -webkit-backdrop-filter: blur(25px) saturate(200%);
         background-color: rgba(24, 24, 25, 0.6);
-        border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.125);
         margin-left: auto;
         margin-right: auto;
@@ -539,7 +537,7 @@ ion-icon[aria-label="mail"]:hover {
     .shuffle-text { 
         font-size: 13px;
     }
-    
+
     h1 {
         font-size: 20px;
     }
