@@ -242,9 +242,5 @@ def redirect_to_original_url(short_code):
         else:
             return "URL no encontrada", 404
 
-@app.route('/user_agreements')
-def user_agreements():
-    return render_template('user_agreements.html')
-
 if __name__ == '__main__':
     app.run(debug=True)
