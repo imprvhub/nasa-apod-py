@@ -51,6 +51,10 @@ body {
     padding-bottom: 150px;
 }
 
+.custom-center {
+    text-align: center;
+  }
+
 .loader {
     width: 3vw; 
     height: 3vw; 
@@ -160,6 +164,22 @@ h1 {
     color: rgba(255, 255, 255, 0.8);
     letter-spacing: 2px;
     text-transform: uppercase;
+}
+
+.heading-terms {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.paragraph-terms {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: justify;
 }
 
 .paragraph {
@@ -500,6 +520,18 @@ h1 {
 }
 
 .paragraph-link:hover {
+color: #E85D2B;
+}
+
+.paragraph-link-terms {
+    color: white; 
+    letter-spacing: 2px;
+    font-size: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.paragraph-link-terms:hover {
 color: #E85D2B;
 }
 
