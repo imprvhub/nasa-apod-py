@@ -180,7 +180,10 @@ h1 {
     letter-spacing: 2px;
     text-transform: uppercase;
     text-align: justify;
+    max-width: 800px; 
+    margin: 0 auto; 
 }
+
 
 .paragraph {
     font-size: 10px;
