@@ -98,7 +98,7 @@ function updateImage() {
                 const videoId = data.url.split('/').pop();
                 const iframe = document.createElement("iframe");
                 iframe.id = "apodImage";
-                iframe.width = "560"; 
+                iframe.width = "100%"; 
                 iframe.height = "400";
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
                 iframe.allowFullscreen = true;
