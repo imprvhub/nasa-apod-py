@@ -99,12 +99,8 @@ function updateImage() {
                 const iframe = document.createElement("iframe");
                 iframe.id = "apodImage";
                 iframe.width = "100%"; 
-                iframe.height = "400";
                 iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
                 iframe.allowFullscreen = true;
-                iframe.style.width = "560px";
-                iframe.style.height = "315px";
-
                 if (imageElement && imageElement.parentNode) {
                     imageElement.parentNode.replaceChild(iframe, imageElement);
                 }

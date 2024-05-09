@@ -286,14 +286,15 @@ h1 {
     margin-bottom: 10px; 
 }
 
+
 #apodImage {
     width: 100%;
     border-radius: 20px;
-    height: 100%;
     cursor: pointer;
-    max-height: 600px; 
-    max-width: 600px; 
-    object-fit: contain; 
+    max-height: 600px;
+    height: 400px;
+    max-width: 600px;
+    object-fit: contain;
     margin-top: 20px;
 }
 
