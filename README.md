@@ -55,10 +55,6 @@ To run this project locally, follow these steps:
    http://localhost:5000/
    ```
 
-
-### To-Do:
-- **Address NASA delays or APOD update failures by implementing fetching from the API on the previous day; resolve date-picker script issue within this context.**
-
 ### Conclusion:
 
 #### Achievements
