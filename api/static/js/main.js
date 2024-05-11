@@ -115,7 +115,7 @@ function updateImage() {
                     explanation.style.display = "block";
                 }
                 if (expandIcon) {
-                    expandIcon.style.display = "inline";
+                    expandIcon.style.display = "none";
                 }
                 if (shareIcon) {
                     shareIcon.style.display = "inline";

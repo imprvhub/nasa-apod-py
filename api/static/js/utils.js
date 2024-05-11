@@ -36,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
             iframe.src = iframeSrc;
             iframe.setAttribute('allowfullscreen', '');
             image.parentNode.replaceChild(iframe, image);
+            if (expandIcon) {
+                expandIcon.style.display = "none";
+            }
         }
     });
 });
