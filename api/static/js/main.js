@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     window.flatpickr("#datePicker", {
         minDate: "1995-06-16",
         maxDate: today,
+        disableMobile: "true",
         onChange: function(selectedDates, dateStr, instance) {
             document.getElementById("recommendedApod").value = "";
             updateImage();
